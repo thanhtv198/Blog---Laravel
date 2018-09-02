@@ -18,6 +18,9 @@ class EditUsersTable extends Migration
             $table->string('phone')->after('name');
             $table->date('birthday')->after('name');
             $table->string('address')->after('name');
+            $table->string('provider_id')->nullable();
+            $table->string('email')->nullable()->change();
+            $table->string('password')->nullable()->change();
         });
     }
 
@@ -33,6 +36,9 @@ class EditUsersTable extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('birthday');
             $table->dropColumn('address');
+            $table->dropColumn('provider_id');
+            $table->string('password')->change();
+            $table->string('email')->unique()->change();
         });
     }
 }

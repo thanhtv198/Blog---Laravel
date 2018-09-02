@@ -1,57 +1,5 @@
-{{--@extends('admin/layouts/head')--}}
-{{--<body class="login">--}}
-{{--<!-- BEGIN LOGO -->--}}
-{{--<div class="logo">--}}
-{{--<a>--}}
-{{--<img src="{{ asset('source/admin/assets/admin/layout4/img/logo-big.png') }}" alt=""/>--}}
-{{--</a>--}}
-{{--</div>--}}
-{{--<!-- END LOGO -->--}}
-{{--<!-- BEGIN SIDEBAR TOGGLER BUTTON -->--}}
-{{--<div class="menu-toggler sidebar-toggler">--}}
-{{--</div>--}}
-{{--<!-- END SIDEBAR TOGGLER BUTTON -->--}}
-{{--<!-- BEGIN LOGIN -->--}}
-{{--<div class="content">--}}
-{{--<!-- BEGIN LOGIN FORM -->--}}
-{{--{!! Form::open(['route' => 'login', 'method' => 'post', 'class' => 'form-login']) !!}--}}
-{{--<h3 class="form-title">{{ trans('en.title_form.login') }}</h3>--}}
-{{--<div class="alert alert-danger display-hide">--}}
-{{--<button class="close" data-close="alert"></button>--}}
-{{--<span>Enter any username and password.</span>--}}
-{{--</div>--}}
-{{--<div class="form-group">--}}
-{{--<label class="control-label visible-ie8 visible-ie9">{{ trans('en.form.email') }}</label>--}}
-{{--<div class="input-icon">--}}
-{{--<i class="fa fa-user"></i>--}}
-{{--{!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => trans('en.form.email')]) !!}--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--<div class="form-group">--}}
-{{--<label class="control-label visible-ie8 visible-ie9">{{ trans('en.form.password') }}</label>--}}
-{{--<div class="input-icon">--}}
-{{--<i class="fa fa-lock"></i>--}}
-{{--{!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('en.form.password')]) !!}--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--<div class="form-actions">--}}
-{{--<label class="checkbox">--}}
-{{--{!! Form::checkbox('remember', old('remember') ? 'checked' : '' , ['id' => 'remember']) !!}--}}
-{{--Remember me </label>--}}
-{{--{{ Form::submit(trans('en.button.login'), ['class' => 'btn green-haze pull-right']) }}--}}
-{{--</div>--}}
-{{--<div class="login-options">--}}
-{{--<h4>Or login with</h4>--}}
-{{--<ul class="social-icons">--}}
-{{--<li>--}}
-{{--<a class="facebook" data-original-title="facebook" href="javascript:;">--}}
-{{--</a>--}}
-{{--</li>--}}
-{{--</ul>--}}
-{{--</div>--}}
-{{--{!! Form::close() !!}--}}
-{{--</div>--}}
-        <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -109,10 +57,10 @@
 
             <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-primary">
+                <a href="{{ url('admin/login/facebook') }}" class="btn btn-block btn-primary">
                     <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
                 </a>
-                <a href="#" class="btn btn-block btn-danger">
+                <a href="{{ url('admin/login/google') }}" class="btn btn-block btn-danger">
                     <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
             </div>

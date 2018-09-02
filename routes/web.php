@@ -20,6 +20,10 @@ Route::group(['prefix' => 'admin'], function () {
     Auth::routes();
     Route::get('/logout', 'Auth\LoginController@logout')->name('admin.logout');
 
+    //login socail
+    Route::get('/login/{social}','Auth\SocialLoginController@redirectToProvider');
+    Route::get('/login/{social}/callback','Auth\SocialLoginController@handleProviderCallback');
+
     // admin
     Route::namespace('Admin')->group(function () {
         //auth admin home

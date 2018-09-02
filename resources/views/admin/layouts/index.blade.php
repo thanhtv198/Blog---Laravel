@@ -40,7 +40,7 @@
 </div>
 <!-- ./wrapper -->
 <!-- jQuery -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 <script src="{{ asset('source/admin/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('source/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -71,6 +71,6 @@
     });
 </script>
 
-
+{{--<script src="{{ asset('js/app.js') }}"></script>--}}
 </body>
 </html>
