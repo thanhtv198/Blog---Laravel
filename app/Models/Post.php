@@ -25,6 +25,16 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
     public function sluggable()
     {
         return [

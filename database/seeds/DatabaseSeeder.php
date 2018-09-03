@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\User::query()->truncate();
+        \App\Models\Post::query()->truncate();
+        \App\Models\Tag::query()->truncate();
+        \App\Models\Topic::query()->truncate();
+
          $this->call(UsersTableSeeder::class);
+         $this->call(TopicsTableSeeder::class);
+         $this->call(PostsTableSeeder::class);
+         $this->call(TagsTableSeeder::class);
     }
 }

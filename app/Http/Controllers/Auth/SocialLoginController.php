@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Contracts\Services\SocialInterface;
+use App\Services\SocialService;
 use Sentinel;
 use Socialite;
-use App\Models\User;
-use Illuminate\Http\Request;
+use Auth;
 use App\Http\Controllers\Controller;
 
 class SocialLoginController extends Controller
@@ -20,30 +21,21 @@ class SocialLoginController extends Controller
     }
 
     /**
-     * Obtain the user information from Social Logged in.
      * @param $social
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function handleProviderCallback($social)
+    public function handleProviderCallback($social, SocialService $service)
     {
-        $user = Socialite::driver($social)->user();
+        try {
+            $user = $service->createOrGetUser($social);
 
-        // $authUser = $this->findOrCreateUser($user, $provider);
-        $authUser = User::where('provider_id', $user->id)->first();
+            Auth::login($user, true);
 
-        if ($authUser) {
-            $loginUser = $authUser;
-        } else {
-            $loginUser = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'provider_id' => $user->id
-            ]);
+            return redirect()->route('admin.home');
+        } catch (\Exception $e) {
+            return redirect('admin/login');
         }
 
-        Auth::login($loginUser, true);
-
-        return redirect('/');
     }
 }
 

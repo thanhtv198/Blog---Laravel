@@ -11,21 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::group(['prefix' => 'admin'], function () {
+//route auth
+Route::group(['prefix' => 'auth'], function () {
     //auth route
     Auth::routes();
-    Route::get('/logout', 'Auth\LoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
     //login socail
-    Route::get('/login/{social}','Auth\SocialLoginController@redirectToProvider');
-    Route::get('/login/{social}/callback','Auth\SocialLoginController@handleProviderCallback');
+    Route::get('/login/{social}', 'Auth\SocialLoginController@redirectToProvider');
+    Route::get('/login/{social}/callback', 'Auth\SocialLoginController@handleProviderCallback');
+});
 
-    // admin
-    Route::namespace('Admin')->group(function () {
+//route admin
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         //auth admin home
         Route::get('/home', 'HomeController@index')->name('admin.home');
 
@@ -34,6 +32,21 @@ Route::group(['prefix' => 'admin'], function () {
 
         //route resource manager
         Route::resource('user', 'UserController');
-    });
 });
+
+//route frontend
+Route::group(['namespace' => 'Frontend'], function () {
+    // home
+    Route::get('/', function () {
+        return view('frontend.home');
+    });
+
+    // route resource post
+    Route::resource('post', 'PostController');
+});
+
+
+
+
+
 
