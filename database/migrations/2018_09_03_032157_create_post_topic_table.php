@@ -15,8 +15,8 @@ class CreatePostTopicTable extends Migration
     {
         Schema::create('post_topic', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
-            $table->integer('topic_id');
+            $table->integer('post_id')->index();
+            $table->integer('topic_id')->index();
             $table->timestamps();
         });
     }

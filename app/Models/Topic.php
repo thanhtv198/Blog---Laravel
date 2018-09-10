@@ -14,6 +14,7 @@ class Topic extends Model
         'name',
         'slug',
         'parent_id',
+        'status',
     ];
 
     public function user()
@@ -21,9 +22,9 @@ class Topic extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function post()
+    public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class)->withTimestamps();
     }
 
     public function sluggable()

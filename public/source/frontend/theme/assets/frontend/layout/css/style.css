@@ -428,6 +428,7 @@ Header and header elements
 	margin-bottom: 23px;
 	z-index: 999;
 	position: relative;
+	height:70px
 }
 
 /* FIX styles BEGIN */
@@ -501,6 +502,7 @@ body.page-header-fixed {
 	color: #333;
 	display: block;	
 	padding: 29px 12px 30px;
+	height:70px;
 }
 .header-navigation ul > li.active > a,
 .header-navigation ul > li > a:hover,

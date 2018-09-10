@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contracts\Repositories\PostRepository;
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,9 +23,9 @@ class PostController extends Controller
      */
     public function index()
     {
-//        $data = $this->repository->getDataAll();
+        $posts = $this->repository->all();
 
-        return view('admin.post.index');
+        return view('admin.post.index', compact('posts'));
     }
 
     /**
@@ -34,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-
+        return view('admin.post.create');
     }
 
     /**
@@ -45,9 +46,9 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $data = $request->all();
+        $this->repository->store($request->all());
 
-        return $this->repository->store($data);
+        return back();
     }
 
     /**
@@ -58,7 +59,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->repository->show($id);
     }
 
     /**
@@ -69,7 +70,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->repository->show($id);
+
+        return view('admin.post.edit', compact('post'));
     }
 
     /**
@@ -81,7 +84,9 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        return $this->repository->show($data);
     }
 
     /**
@@ -93,5 +98,17 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function activePost($id)
+    {
+        return $this->repository->active($id);
+    }
+
+    public function inActivePost(Request $request, $id)
+    {
+        $data = $request->reason;
+
+        return $this->repository->inActive($id, $data);
     }
 }

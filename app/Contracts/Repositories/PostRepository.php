@@ -2,21 +2,13 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Models\Post;
-
 interface PostRepository extends AbstractRepository
 {
-    public function getDataAll($dataSelect = ['*']);
+    public function pending($id);
 
-    public function getDataPost($id);
+    public function paginate();
 
-    public function store(array $data);
+    public function getTags($id);
 
-    public function edit($id);
-
-    public function update(Post $post, array $data);
-
-    public function destroy(Post $post);
-
-    public function changeStatus(Post $post);
+    public function inActive($id, $data);
 }

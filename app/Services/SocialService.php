@@ -17,14 +17,16 @@ class SocialService implements SocialInterface
 
         $user = User::updateOrCreate(
             [
-                'email' => $authUser->email
+                'email' => $authUser->email,
             ],
             [
                 'provider_id' => $authUser->id,
-                'name' => $authUser->name
+                'name' => $authUser->name,
             ]
         );
+
         $roles = 0;
+
         $user->roles()->sync($roles);
 
         return $user;

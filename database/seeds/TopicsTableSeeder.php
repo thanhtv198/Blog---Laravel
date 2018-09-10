@@ -18,8 +18,9 @@ class TopicsTableSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
             DB::table('topics')->insert([
                 'name' => $faker->unique()->sentence($nbWords = 3),
-                'slug' => $faker->unique()->slug,
-                'parent_id' => null
+                'slug' => $faker->unique()->slug(4),
+                'parent_id' => null,
+                'quantity' => 0
             ]);
         }
     }

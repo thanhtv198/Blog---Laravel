@@ -19,6 +19,7 @@ License: You must have a valid license purchased only from themeforest (the abov
 <!-- Head BEGIN -->
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Blog Page | Metronic Frontend</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -56,10 +57,21 @@ License: You must have a valid license purchased only from themeforest (the abov
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/style-responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/themes/red.css') }}" rel="stylesheet" id="style-color">
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/frontend/theme/assets/frontend/custom.css') }}" rel="stylesheet">
     <!-- Theme styles END -->
 </head>
 <!-- Head END -->
 <body class="corporate">
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=274435310069045&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
     <!-- Header -->
     @include('frontend/layouts/header')
     <!-- /.navbar -->

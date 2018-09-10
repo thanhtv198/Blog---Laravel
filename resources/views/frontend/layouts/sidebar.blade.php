@@ -3,76 +3,33 @@
     <!-- CATEGORIES START -->
     <h2 class="no-top-space">Categories</h2>
     <ul class="nav sidebar-categories margin-bottom-40">
-        <li><a href="javascript:;">London (18)</a></li>
-        <li><a href="javascript:;">Moscow (5)</a></li>
-        <li class="active"><a href="javascript:;">Paris (12)</a></li>
-        <li><a href="javascript:;">Berlin (7)</a></li>
-        <li><a href="javascript:;">Istanbul (3)</a></li>
+        @foreach($topics as $row)
+            <li><a href="{{ route('posts',  ['id' => $row->id]) }}">{{ $row->name }} ({{ count($row->posts) }})</a></li>
+        @endforeach
     </ul>
     <!-- CATEGORIES END -->
 
     <!-- BEGIN RECENT NEWS -->
     <h2>Recent News</h2>
     <div class="recent-news margin-bottom-10">
+        @foreach($recentPost as $row)
         <div class="row margin-bottom-10">
             <div class="col-md-3">
                 <img class="img-responsive" alt=""
                      src="{{ asset('source/frontend/theme/assets/frontend/pages/img/people/img2-large.jpg') }}">
             </div>
             <div class="col-md-9 recent-news-inner">
-                <h3><a href="javascript:;">Letiusto gnissimos</a></h3>
-                <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
+                <h3 class="title-recent-post-sidebar"><a href="{{ route('posts.show', $row->id) }}">{{ $row->title }}</a></h3>
+                <p class="content-recent-post-sidebar">{{ $row->content }} </p>
             </div>
         </div>
-        <div class="row margin-bottom-10">
-            <div class="col-md-3">
-                <img class="img-responsive" alt=""
-                     src="{{ asset('source/frontend/theme/assets/frontend/pages/img/people/img1-large.jpg') }}">
-            </div>
-            <div class="col-md-9 recent-news-inner">
-                <h3><a href="javascript:;">Deiusto anissimos</a></h3>
-                <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
-            </div>
-        </div>
-        <div class="row margin-bottom-10">
-            <div class="col-md-3">
-                <img class="img-responsive" alt=""
-                     src="{{ asset('source/frontend/theme/assets/frontend/pages/img/people/img3-large.jpg') }}">
-            </div>
-            <div class="col-md-9 recent-news-inner">
-                <h3><a href="javascript:;">Tesiusto baissimos</a></h3>
-                <p>Decusamus tiusto odiodig nis simos ducimus qui sint</p>
-            </div>
-        </div>
+            @endforeach
     </div>
     <!-- END RECENT NEWS -->
 
-    <!-- BEGIN BLOG TALKS -->
-    <div class="blog-talks margin-bottom-30">
-        <h2>Popular Talks</h2>
-        <div class="tab-style-1">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab-1">Multipurpose</a></li>
-                <li><a data-toggle="tab" href="#tab-2">Documented</a></li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane row-fluid fade in active">
-                    <p class="margin-bottom-10">Raw denim you probably haven't heard of them jean shorts Austin. eu banh mi,
-                        qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.</p>
-                    <p><a class="more" href="javascript:;">Read more</a></p>
-                </div>
-                <div id="tab-2" class="tab-pane fade">
-                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. aliquip jean
-                        shorts ullamco ad vinyl aesthetic magna delectus mollit. Keytar helvetica VHS salvia..</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END BLOG TALKS -->
-
     <!-- BEGIN BLOG PHOTOS STREAM -->
     <div class="blog-photo-stream margin-bottom-20">
-        <h2>Photos Stream</h2>
+        <h2>Top Views</h2>
         <ul class="list-unstyled">
             <li><a href="javascript:;"><img alt=""
                                             src="{{ asset('source/frontend/theme/assets/frontend/pages/img/people/img5-small.jpg') }}"></a>
@@ -106,14 +63,9 @@
     <div class="blog-tags margin-bottom-20">
         <h2>Tags</h2>
         <ul>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>OS</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Metronic</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Dell</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Conquer</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>MS</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Google</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Keenthemes</a></li>
-            <li><a href="javascript:;"><i class="fa fa-tags"></i>Twitter</a></li>
+            @foreach($tags as $tag)
+                <li><a href=""><i class="fa fa-tags"></i>{{ $tag->name }}</a></li>
+            @endforeach
         </ul>
     </div>
     <!-- END BLOG TAGS -->

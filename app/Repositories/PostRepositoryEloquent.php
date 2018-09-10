@@ -4,7 +4,8 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\PostRepository;
 use App\Models\Post;
-
+use App\Models\Tag;
+use DB;
 class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostRepository
 {
 
@@ -13,27 +14,30 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
         return app(Post::class);
     }
 
-    public function getDataAll($dataSelect = ['*'])
+    public function all()
     {
         $posts = $this->model()
-            ->select($dataSelect)
-            ->orderBy('created_at', 'DESC')
+            ->latest()
             ->get();
 
         return $posts;
     }
 
-    public function getDataPost($id)
+    public function show($id)
     {
-        try {
-            $post = $this->model()->findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            Log::error($e->getMessage());
-            throw new NotFoundException();
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            throw new UnknownException($e->getMessage(), $e->getCode());
+        $post = $this->model()->findOrFail($id);
+
+        $tags = $post->tags;
+        $tagsName = [];
+        foreach ($tags as $tag) {
+            $tagsName[] = array([
+                'id' => $tag->id,
+                'name' => $tag->name,
+            ]);
         }
+
+        $tagsName = array_slice($tagsName, 0, 2);
+        $post->setAttribute('tags_name', $tagsName);
 
         return $post;
     }
@@ -45,33 +49,14 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
             'slug' => $data['slug'],
             'description' => $data['description'],
             'content' => $data['content'],
-            'active' => $data['active'],
+            'status' => $data['active'],
             'image' => $data['image'],
             'view' => $data['view'],
         ]);
     }
 
-    public function edit($id)
+    public function update($id, array $data)
     {
-        try {
-            $post = $this->model()->findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            Log::error($e->getMessage());
-            throw new NotFoundException();
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            throw new UnknownException($e->getMessage(), $e->getCode());
-        }
-        return $post;
-    }
-
-    public function update(Post $post, array $data)
-    {
-        $slug = $this->createUrlSlug($data['title']);
-        $path = $post->slide_url;
-        if (isset($data['medias'])) {
-            $path = $this->uploadFile($data['medias'][0]['file'], strtolower(class_basename($this->model())), 'image');
-        }
         $post->update([
             'slide_url' => $path,
             'title' => $data['title'],
@@ -82,42 +67,56 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
         ]);
     }
 
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $post->delete();
+        $post = $this->model()->findOrFail($id);
+
+        return $post->delete();
     }
 
-    public function changePriority(Post $post, $dataSelect = ['*'])
+    public function active($id)
     {
-        if ($post->priority == 0) {
-            $temp = $this->model()
-                ->select('priority')
-                ->orderBy('priority', 'DESC')
-                ->first()->priority;
-            $post->update([
-                'priority' => $temp + 1,
-                'public' => 1,
-            ]);
-        } else {
-            $posts = $this->model()
-                ->select($dataSelect)
-                ->where('priority', '>', $post->priority)
-                ->get();
-            foreach ($posts as $item) {
-                $item->update([
-                    'priority' => $item->priority - 1,
-                ]);
-            }
-            $post->update([
-                'priority' => 0,
-            ]);
-        }
-    }
+        $post = $this->model()->findOrFail($id);
 
-    public function changeStatus(Post $post)
-    {
         $post->update([
-            'public' => !$post->public,
+            'status' => config('blog.post.status.active'),
         ]);
+    }
+
+    public function inActive($id, $data)
+    {
+        $post = $this->model()->findOrFail($id);
+
+        $post->update([
+            'status' => config('blog.post.status.inactive'),
+            'reject_reason' => $data,
+        ]);
+    }
+
+    public function pending($id)
+    {
+        $post = $this->model()->findOrFail($id)->update([
+            'status' => config('blog.post.pending'),
+        ]);
+
+        return $post;
+    }
+
+    public function paginate()
+    {
+        $post = $this->model()
+            ->latest()
+            ->paginate(config('blog.post.paginate'));
+
+        return $post;
+    }
+
+    public function getTags($id)
+    {
+        $tags = Tag::latest()
+            ->take(config('blog.tag.limit'))
+            ->get();
+
+        return $tags;
     }
 }

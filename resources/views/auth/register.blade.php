@@ -5,7 +5,7 @@
             <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
             <div class="row omb_row-sm-offset-3">
                 <div class="col-xs-12 col-sm-6">
-                    {!! Form::open(['route' => 'login', 'method' => 'post', 'class' => 'omb_loginForm']) !!}
+                    {!! Form::open(['route' => 'register', 'method' => 'post', 'class' => 'omb_loginForm']) !!}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('en.form.name')]) !!}
@@ -32,25 +32,16 @@
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        {!! Form::password('repassword', ['class' => 'form-control', 'placeholder' => trans('en.form.repassword')]) !!}
+                        {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'password-confirm', 'placeholder' => trans('en.form.repassword')]) !!}
                     </div>
-                    <span class="help-block">Password error</span>
+                    <span class="help-block"></span>
+                    <span class="help-block"></span>
+                    <br>
                     {{ Form::submit(trans('en.button.sign_up'), ['class' => 'btn btn-lg btn-primary btn-block']) }}
                     {{ Form::close() }}
                 </div>
             </div>
-            <div class="row omb_row-sm-offset-3">
-                <div class="col-xs-12 col-sm-3">
-                    <label class="checkbox">
-                        <input type="checkbox" value="remember">Remember Me
-                    </label>
-                </div>
-                <div class="col-xs-12 col-sm-3">
-                    <p class="omb_forgotPwd">
-                        <a href="#">Forgot password?</a>
-                    </p>
-                </div>
-            </div>
+            
             <div class="row omb_row-sm-offset-3 omb_loginOr">
                 <div class="col-xs-12 col-sm-6">
                     <hr class="omb_hrOr">

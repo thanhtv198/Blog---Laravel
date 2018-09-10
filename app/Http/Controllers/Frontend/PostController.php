@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Contracts\Repositories\PostRepository;
+use App\Http\Requests\CommentRequets;
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class PostController extends Controller
 {
+    protected $repository;
+
+    public function __construct(PostRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('frontend.post.detail');
+        $data = $this->repository->paginate();
+
+        return view('frontend.post.index', compact('data'));
     }
 
     /**
@@ -46,7 +60,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = $this->repository->show($id);
+
+        $tags = $this->repository->getTags($id);
+
+        $comments = Comment::getById($id);
+
+        return view('frontend.post.detail', compact('post', 'tags', 'comments'));
     }
 
     /**
@@ -81,5 +101,42 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param CommentRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function comment(Request $request, $id)
+    {
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'status' => 1,
+            'post_id' => $request->id,
+        ]);
+
+        $comment = Comment::create($request->all());
+
+        return response()->json($comment);
+    }
+
+
+    public function reply(Request $request, $id)
+    {       
+        // return $id;
+        return $request->repContent;
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'status' => 1,
+            'content' => $request->repContent,
+            'post_id' => $id,
+            'parent_id' => $request->parent_id,
+        ]);
+
+        return Comment::create($request);
+
+//        $comment = Comment::create($request->all());
+
+
     }
 }

@@ -32,28 +32,19 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fa fa-tag"></i>
-                        <p>
-                            Tags
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-sticky-note-o"></i>
                         <p>
                             Posts
-                            <i class="right fa fa-angle-left"></i>
+                            <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/UI/general.html" class="nav-link">
+                            <a href="{{ route('admin.posts.index') }}" class="nav-link">
                                 <i class="fa fa-edit"></i>
-                                <p>General</p>
+                                <p>View All Posts</p>
                             </a>
                         </li>
                     </ul>
@@ -62,18 +53,27 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
-                            UI Elements
+                            Accounts
                             <i class="fa fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/UI/general.html" class="nav-link">
+                            <a href="{{ route('admin.users.index') }}" class="nav-link">
                                 <i class="fa fa-user-circle-o"></i>
-                                <p>General</p>
+                                <p>Members Page</p>
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-tag"></i>
+                        <p>
+                            Tags
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

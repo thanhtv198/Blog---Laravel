@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class SocialLoginController extends Controller
 {
+    protected $repository;
+
+    public function __construct(SocialInterface $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Handle Social login request
      * @return response
@@ -24,16 +30,16 @@ class SocialLoginController extends Controller
      * @param $social
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function handleProviderCallback($social, SocialService $service)
+    public function handleProviderCallback($social)
     {
         try {
-            $user = $service->createOrGetUser($social);
+            $user = $this->repository->createOrGetUser($social);
 
             Auth::login($user, true);
 
-            return redirect()->route('admin.home');
+            return redirect()->route('home');
         } catch (\Exception $e) {
-            return redirect('admin/login');
+            return back();
         }
 
     }

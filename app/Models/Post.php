@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-
+    use Searchable;
     use Sluggable;
 
     protected $fillable = [
@@ -15,7 +16,8 @@ class Post extends Model
         'slug',
         'description',
         'content',
-        'active',
+        'status',
+        'reject_reason',
         'image',
         'view',
     ];
@@ -25,9 +27,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function topic()
+    public function topics()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsToMany(Topic::class)->withTimestamps();
     }
 
     public function tags()
@@ -35,12 +37,34 @@ class Post extends Model
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
+    public function scopeGetRecent($query)
+    {
+        return $query->latest();
+    }
+
     public function sluggable()
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
+    }
+
+    public function searchableAs()
+    {
+        return 'posts_index';
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        return $array;
     }
 }

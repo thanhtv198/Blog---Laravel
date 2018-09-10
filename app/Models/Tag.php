@@ -7,12 +7,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model
 {
-
     use Sluggable;
 
     protected $fillable = [
         'name',
         'slug',
+        'status',
+        'view',
     ];
 
     public function posts()

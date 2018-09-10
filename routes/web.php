@@ -10,43 +10,65 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//auth route
+Auth::routes();
 
-//route auth
-Route::group(['prefix' => 'auth'], function () {
-    //auth route
-    Auth::routes();
-    Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+//route Auth
+Route::namespace('Auth')->group(function () {
+    Route::get('/logout', 'LoginController@logout');
 
-    //login socail
-    Route::get('/login/{social}', 'Auth\SocialLoginController@redirectToProvider');
-    Route::get('/login/{social}/callback', 'Auth\SocialLoginController@handleProviderCallback');
+    //login social
+    Route::get('/login/{social}', 'SocialLoginController@redirectToProvider');
+    Route::get('/login/{social}/callback', 'SocialLoginController@handleProviderCallback');
 });
 
 //route admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-        //auth admin home
-        Route::get('/home', 'HomeController@index')->name('admin.home');
+    //auth admin home
+    Route::get('/home', 'HomeController@index')->name('admin.home');
 
-        // route resource post
-        Route::resource('post', 'PostController');
+    //login, logout admin
+    Route::get('/login', 'UserController@showLoginForm');
+    Route::post('/login', 'UserController@login')->name('admin.login');
+    Route::get('/logout', 'UserController@logout');
 
-        //route resource manager
-        Route::resource('user', 'UserController');
+    // route resource post
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('posts', 'PostController');
+    });
+    //route status post
+    Route::post('posts/active/{id}', 'PostController@activePost')->name('admin.posts.active');
+    Route::post('posts/inactive/{id}', 'PostController@inActivePost')->name('admin.posts.inactive');
+
+    //route resource user
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('users', 'UserController');
+    });
+    //route status user
+    Route::post('users/active/{id}', 'UserController@activeUser')->name('admin.users.active');
+    Route::post('users/inactive/{id}', 'UserController@inActiveUser')->name('admin.users.inactive');
 });
 
 //route frontend
 Route::group(['namespace' => 'Frontend'], function () {
     // home
-    Route::get('/', function () {
-        return view('frontend.home');
-    });
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::post('/search/posts', 'HomeController@searchPost')->name('search.post');
 
     // route resource post
-    Route::resource('post', 'PostController');
+    Route::resource('posts', 'PostController');
+    //comment posts
+    Route::post('posts/{id}/comments', 'PostController@comment')->name('posts.comment');
+    Route::post('posts/{id}/replies', 'PostController@reply')->name('posts.reply');
+
+    //route resource topic
+    Route::resource('topics', 'TopicController');
+    Route::get('topics/{id}/posts', [
+        'as' => 'posts',
+        'uses' => 'TopicController@getPostByTopicId',
+    ]);
+
+    //route resource tag
+    Route::resource('tags', 'TagController');
 });
-
-
-
-
-
 

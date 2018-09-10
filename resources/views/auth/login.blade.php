@@ -41,7 +41,7 @@
             </div>
             <div class="row omb_row-sm-offset-3 omb_socialButtons">
                 <div class="col-xs-4 col-sm-2">
-                    <a href="{{ url('auth/login/facebook') }}" class="btn btn-lg btn-block omb_btn-facebook loginBtn loginBtn--facebook">
+                    <a href="{{ url('login/facebook') }}" class="btn btn-lg btn-block omb_btn-facebook loginBtn loginBtn--facebook">
                         <i class="fa fa-facebook visible-xs"></i>
                         <span class="hidden-xs">Facebook</span>
                     </a>
@@ -49,7 +49,7 @@
                 <div class="col-xs-6 col-sm-2">
                 </div>
                 <div class="col-xs-6 col-sm-2">
-                    <a href="{{ url('auth/login/google') }}" class="btn btn-lg btn-block omb_btn-google loginBtn loginBtn--google">
+                    <a href="{{ url('login/google') }}" class="btn btn-lg btn-block omb_btn-google loginBtn loginBtn--google">
                         <i class="fa fa-google-plus visible-xs"></i>
                         <span class="hidden-xs">Google+</span>
                     </a>

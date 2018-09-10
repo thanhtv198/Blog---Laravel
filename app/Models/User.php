@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -18,11 +18,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
-        'address',
         'birthday',
         'provider_id',
-        'status'
+        'status',
+        'block_reason',
     ];
 
     /**
@@ -43,5 +42,9 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+    public function s($i)
+    {
+        echo 5;
     }
 }

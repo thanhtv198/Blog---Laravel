@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Contracts\Repositories\TopicRepository;
 use App\Http\Controllers\Controller;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
+    protected $repository;
+
+    public function __construct(TopicRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +23,17 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        $topics = $this->repository->paginate();
+
+        return view('frontend.post.index', compact('topics'));
     }
 
+    public function getPostByTopicId($id)
+    {
+        $posts = $this->repository->getPostById($id);
+       
+        return view('frontend.topic.index', compact('posts'));
+    }
     /**
      * Show the form for creating a new resource.
      *

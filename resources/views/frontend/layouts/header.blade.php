@@ -23,7 +23,7 @@
             <!-- BEGIN TOP BAR LEFT PART -->
             <div class="col-md-6 col-sm-6 additional-shop-info">
                 <ul class="list-unstyled list-inline">
-                    <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
+                    <li><i class="fa fa-phone"></i><span>09339472473</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
                 </ul>
             </div>
@@ -33,6 +33,7 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <li><a href="{{ route('login') }}">Log In</a></li>
                     <li><a href="{{ route('register') }}">Registration</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -41,10 +42,11 @@
 </div>
 <!-- END TOP BAR -->
 <!-- BEGIN HEADER -->
-<div class="header">
+<div class="header" id="header-scroll">
     <div class="container">
-        <a class="site-logo" href="index.html"><img src="{{ asset('source/frontend/theme/assets/frontend/layout/img/logos/logo-corp-red.png') }}"
-                                                    alt="Metronic FrontEnd"></a>
+        <a class="site-logo" href="{{ route('home') }}">
+            <img src="{{ asset('source/frontend/theme/assets/frontend/layout/img/logos/logo-corp-red.png') }}">
+        </a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -54,7 +56,6 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                         Home
-
                     </a>
 
                     <ul class="dropdown-menu">
@@ -85,19 +86,7 @@
                                             <li><a href="index.html">Indoor Trainers</a></li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Clothing</h4>
-                                        <ul>
-                                            <li><a href="index.html">Base Layer</a></li>
-                                            <li><a href="index.html">Character</a></li>
-                                            <li><a href="index.html">Chinos</a></li>
-                                            <li><a href="index.html">Combats</a></li>
-                                            <li><a href="index.html">Cricket Clothing</a></li>
-                                            <li><a href="index.html">Fleeces</a></li>
-                                            <li><a href="index.html">Gilets</a></li>
-                                            <li><a href="index.html">Golf Tops</a></li>
-                                        </ul>
-                                    </div>
+                                 
                                     <div class="col-md-4 header-navigation-col">
                                         <h4>Accessories</h4>
                                         <ul>
@@ -127,17 +116,7 @@
                         <li><a href="page-about.html">About Us</a></li>
                         <li><a href="page-services.html">Services</a></li>
                         <li><a href="page-prices.html">Prices</a></li>
-                        <li><a href="page-faq.html">FAQ</a></li>
-                        <li><a href="page-gallery.html">Gallery</a></li>
-                        <li><a href="page-search-result.html">Search Result</a></li>
-                        <li><a href="page-404.html">404</a></li>
-                        <li><a href="page-500.html">500</a></li>
-                        <li><a href="page-login.html">Login Page</a></li>
-                        <li><a href="page-forgotton-password.html">Forget Password</a></li>
-                        <li><a href="page-reg-page.html">Signup Page</a></li>
-                        <li><a href="page-careers.html">Careers</a></li>
-                        <li><a href="page-site-map.html">Site Map</a></li>
-                        <li><a href="page-contacts.html">Contact</a></li>
+                      
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -179,9 +158,7 @@
 
                     <ul class="dropdown-menu">
                         <li><a href="portfolio-4.html">Portfolio 4</a></li>
-                        <li><a href="portfolio-3.html">Portfolio 3</a></li>
-                        <li><a href="portfolio-2.html">Portfolio 2</a></li>
-                        <li><a href="portfolio-item.html">Portfolio Item</a></li>
+                
                     </ul>
                 </li>
                 <li class="dropdown active">
@@ -204,14 +181,16 @@
                     <span class="sep"></span>
                     <i class="fa fa-search search-btn"></i>
                     <div class="search-box">
-                        <form action="#">
+                            {!! Form::open(['route' => 'search.post', 'method' => 'post']) !!}
                             <div class="input-group">
-                                <input type="text" placeholder="Search" class="form-control">
-                                <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Search</button>
-                    </span>
+                                {!! Form::text('key', null, ['class' => 'form-control', 'placeholder' => trans('en.form.search')]) !!}
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                        trans('en.form.search')
+                                </button>
+                            </span>
                             </div>
-                        </form>
+                        {{ Form::close() }}}
                     </div>
                 </li>
                 <!-- END TOP SEARCH -->
@@ -221,3 +200,25 @@
     </div>
 </div>
 <!-- Header END -->
+<style>
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+</style>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("header-scroll");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>

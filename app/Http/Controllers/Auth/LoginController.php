@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequet;
 use App\Models\User;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Repositories\UserRepositoryEloquent;
 use Auth;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -20,7 +20,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -37,13 +37,12 @@ class LoginController extends Controller
         return view('auth.login_admin');
     }
 
-    public function login(LoginRequet $request)
+    public function login(LoginRequet $request, UserRepositoryEloquent $user)
     {
-        $email = $request->email;
-        $password = $request->password;
+        $data = $request->all();
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->route('admin.home')->with('success', trans('en.login.success'));
+        if ($user->login($data)) {
+            return redirect('/')->with('success', trans('en.login.success'));
         } else {
             return redirect()->back()->with('message', trans('en.login.failed'));
         }
@@ -53,7 +52,7 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect('admin/login');
+        return redirect()->route('login');
     }
 
     /**
@@ -61,7 +60,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
