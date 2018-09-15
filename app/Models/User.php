@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\SendMailResetPassword;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +21,10 @@ class User extends Authenticatable
         'email',
         'password',
         'birthday',
+        'avatar',
         'provider_id',
         'status',
+        'role',
         'block_reason',
     ];
 
@@ -34,17 +38,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dates = ['deleted_at'];
+
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
-    public function roles()
+    public function questions()
     {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-    public function s($i)
-    {
-        echo 5;
+        return $this->hasMany(Question::class);
     }
 }

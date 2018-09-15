@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 Route::group(['namespace' => 'Frontend'], function () {
     // home
     Route::get('/', 'HomeController@index')->name('home');
-    Route::post('/search/posts', 'HomeController@searchPost')->name('search.post');
+    Route::get('/search/posts', 'HomeController@searchPost')->name('search.post');
 
     // route resource post
     Route::resource('posts', 'PostController');
@@ -70,5 +70,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     //route resource tag
     Route::resource('tags', 'TagController');
+
+    Route::resource('users', 'UserController');
+    Route::get('users/{id}/timeline', 'UserController@getTimeline')->name('users.timeline');
 });
 

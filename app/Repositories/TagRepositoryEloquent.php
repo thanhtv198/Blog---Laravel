@@ -42,6 +42,11 @@ class TagRepositoryEloquent extends AbstractRepositoryEloquent implements TagRep
         return $tag;
     }
 
+    public function edit($id)
+    {
+        // TODO: Implement edit() method.
+    }
+
     public function update($id, array $data)
     {
         $tag = $this->findOrFail($id)->update([

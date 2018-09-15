@@ -22,12 +22,10 @@ class SocialService implements SocialInterface
             [
                 'provider_id' => $authUser->id,
                 'name' => $authUser->name,
+                'status' => 0,
+                'role' => 1,
             ]
         );
-
-        $roles = 0;
-
-        $user->roles()->sync($roles);
 
         return $user;
     }

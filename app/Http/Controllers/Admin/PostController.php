@@ -59,7 +59,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->show($id);
+        //
     }
 
     /**
@@ -84,9 +84,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        
-        return $this->repository->show($data);
+        //
     }
 
     /**
@@ -97,7 +95,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->destroy($id);
     }
 
     public function activePost($id)

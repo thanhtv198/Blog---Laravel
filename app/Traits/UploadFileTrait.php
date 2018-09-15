@@ -2,12 +2,18 @@
 
 namespace App\Traits;
 
+
 trait UploadFileTrait
 {
-    public function uploadImage($image, $path)
+    public function uploadFile($file)
     {
-        if (!is_null($image)) {
-            $image->move($path);
+        $name = '';
+        if (!is_null($file)) {
+            $name = str_random(6) . '_' . $file->getClientOriginalName();
+
+            $file->move(config('blog.user.upload'), $name);
         }
+
+        return $name;
     }
 }

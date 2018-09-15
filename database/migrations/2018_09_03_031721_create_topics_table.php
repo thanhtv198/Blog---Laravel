@@ -18,8 +18,8 @@ class CreateTopicsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug');
             $table->integer('parent_id')->nullable();
-            $table->tinyInteger('status')->nullable()->default(1);
-            $table->integer('quantity')->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->integer('quantity');
             $table->softDeletesTz();
             $table->timestamps();
         });

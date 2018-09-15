@@ -31,8 +31,10 @@ class TopicController extends Controller
     public function getPostByTopicId($id)
     {
         $posts = $this->repository->getPostById($id);
+
+        $topicSidebar = $id;
        
-        return view('frontend.topic.index', compact('posts'));
+        return view('frontend.topic.index', compact('posts', 'topicSidebar'));
     }
     /**
      * Show the form for creating a new resource.

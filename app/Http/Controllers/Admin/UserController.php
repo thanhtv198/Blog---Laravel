@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Contracts\Repositories\UserRepository;
 use App\Http\Requests\LoginRequet;
 use App\Http\Requests\UserRequets;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -19,7 +20,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,15 +32,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Stoure
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * @param UserRequets $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -53,37 +47,20 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show detail user own
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return $this->repository->show($id);
-    }
+        $user = $this->repository->show($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-    }
+        $posts = $user->posts()->paginate(2);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $questions = $user->questions()->paginate(3);
+
+        return view('admin.user.detail', compact('user', 'posts', 'questions'));
     }
 
     /**
@@ -94,14 +71,25 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->destroy($id);
     }
 
+    /**
+     * Show login form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showLoginForm()
     {
         return view('auth.login_admin');
     }
 
+    /**
+     * Amin login
+     *
+     * @param LoginRequet $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(LoginRequet $request)
     {
         $data = $request->all();
@@ -113,6 +101,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Admin logout
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function logout()
     {
         Auth::logout();
@@ -120,11 +113,24 @@ class UserController extends Controller
         return redirect('admin/login');
     }
 
+    /**
+     * Active user
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function activeUser($id)
     {
         return $this->repository->active($id);
     }
 
+    /**
+     * Block user
+     *
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
     public function inActiveUser(Request $request, $id)
     {
         $data = $request->reason;

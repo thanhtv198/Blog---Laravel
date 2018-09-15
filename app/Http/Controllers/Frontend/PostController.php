@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\Repositories\PostRepository;
 use App\Http\Requests\CommentRequets;
+use App\Http\Requests\PostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.post.create');
     }
 
     /**
@@ -47,9 +48,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $data = $request->only('content', 'title');
+
+        $this->repository->store($data);
+
+        return redirect()->route('home');
     }
 
     /**
@@ -77,7 +82,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->repository->edit($id);
+
+        return view('frontend.post.edit', compact('post'));
     }
 
     /**
@@ -89,7 +96,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->only('title', 'content');
+//dd($data);
+        $this->repository->update($id, $data);
+
+        return redirect()->route('home');
+
     }
 
     /**
@@ -100,7 +112,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd(4);
     }
 
     /**
@@ -112,7 +124,8 @@ class PostController extends Controller
         $request->merge([
             'user_id' => Auth::user()->id,
             'status' => 1,
-            'post_id' => $request->id,
+            'commentable_id' => $id,
+            'commentable_type' => 'post',
         ]);
 
         $comment = Comment::create($request->all());
@@ -122,21 +135,20 @@ class PostController extends Controller
 
 
     public function reply(Request $request, $id)
-    {       
-        // return $id;
-        return $request->repContent;
-        $request->merge([
+    {
+       $comment =  Comment::create([
             'user_id' => Auth::user()->id,
             'status' => 1,
             'content' => $request->repContent,
-            'post_id' => $id,
+            'commentable_id' => $id,
+            'commentable_type' => 'post',
             'parent_id' => $request->parent_id,
         ]);
 
-        return Comment::create($request);
-
-//        $comment = Comment::create($request->all());
-
+        return response()->json([
+            'comment' => $comment,
+            'username' => auth()->user()->name,
+        ]);
 
     }
 }

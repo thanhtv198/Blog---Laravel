@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $faker->unique()->name,
                 'email' => $faker->unique()->email,
+                'role' => 0,
                 'birthday' => '2000-09-07',
                 'avatar' => 'https://s3.amazonaws.com/uifaces/faces/twitter/heyimjuani/128.jpg',
                 'password' => bcrypt('123456')

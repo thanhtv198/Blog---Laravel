@@ -20,9 +20,7 @@ class PostsTableSeeder extends Seeder
                 'user_id' => $i + 1,
                 'title' => $faker->unique()->sentence($nbWords = 15),
                 'slug' => $faker->unique()->slug(10),
-                'description' => $faker->unique()->sentence($nbWords = 50),
                 'content' => $faker->unique()->sentence($nbWords = 500),
-                'image' => 'http://lorempixel.com/1000/300/cats/',
                 'status' => 1,
                 'view' => 0,
             ]);

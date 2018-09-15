@@ -6,6 +6,7 @@ use App\Contracts\Repositories\PostRepository;
 use App\Models\Post;
 use App\Models\Tag;
 use DB;
+
 class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostRepository
 {
 
@@ -29,6 +30,11 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
 
         $tags = $post->tags;
         $tagsName = [];
+        $view = $post->view;
+        $post->update([
+            'view' => $view + 1,
+        ]);
+
         foreach ($tags as $tag) {
             $tagsName[] = array([
                 'id' => $tag->id,
@@ -37,6 +43,7 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
         }
 
         $tagsName = array_slice($tagsName, 0, 2);
+
         $post->setAttribute('tags_name', $tagsName);
 
         return $post;
@@ -44,26 +51,29 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
 
     public function store(array $data)
     {
-        return $this->model()->create([
+        $post = $this->model()->create([
+            'user_id' => auth()->user()->id,
             'title' => $data['title'],
-            'slug' => $data['slug'],
-            'description' => $data['description'],
             'content' => $data['content'],
-            'status' => $data['active'],
-            'image' => $data['image'],
-            'view' => $data['view'],
+            'status' => config('blog.post.status.active'),
+            'view' => Post::VIEW,
         ]);
+
+        return $post;
+    }
+
+    public function edit($id)
+    {
+        return $this->model()->findOrFail($id);
     }
 
     public function update($id, array $data)
     {
-        $post->update([
-            'slide_url' => $path,
+        $post = $this->model()->findOrFail($id);
+
+        return $post->update([
             'title' => $data['title'],
-            'slug' => $slug,
             'content' => $data['content'],
-            'public' => $data['public'],
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 

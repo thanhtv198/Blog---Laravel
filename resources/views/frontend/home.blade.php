@@ -28,8 +28,9 @@
                                         <li><i class="fa fa-calendar"></i>{{ $row->created_at }}</li>
                                         <li><i class="fa fa-eye"></i>{{ $row->view }}</li>
                                     </ul>
-                                    <p>{{ $row->content }}</p>
-                                    <a href="blog-item.html" class="more">Read more <i class="fa fa-angle-right"></i></a>
+                                    <div view="home-post">
+                                        <p class="content-post">{!! $row->content !!}</p>
+                                    </div>
                                 </div>
                             </div>
                             <hr class="blog-post-sep">
@@ -47,4 +48,22 @@
         </div>
     </div>
 </div>
+@stop
+<style>
+    .morecontent span {
+        display: none;
+    }
+
+    .morelink {
+        display: block;
+        color: #2784e1!important;
+    }
+    [view=home-post] img{
+        display:none;
+    }
+
+
+</style>
+@section('script')
+    <script src="{{ asset('source/frontend/theme/assets/frontend/js/jquery-1.9.1.js') }}" type="text/javascript"></script>
 @stop

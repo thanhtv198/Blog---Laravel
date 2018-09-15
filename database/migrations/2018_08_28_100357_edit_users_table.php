@@ -14,13 +14,14 @@ class EditUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('status')->default(1)->nullable()->after('name');
+            $table->integer('status')->after('name')->default(0);
+            $table->tinyInteger('role')->after('name')->default(0);
             $table->string('avatar')->after('name')->nullable();
             $table->date('birthday')->after('name')->nullable();
             $table->string('provider_id')->nullable()->after('name');
             $table->string('email')->nullable()->change();
             $table->string('password')->nullable()->change();
-            $table->softDeletesTz();
+            $table->softDeletesTz()->after('status');
         });
     }
 
@@ -33,6 +34,7 @@ class EditUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('status');
+            $table->dropColumn('role');
             $table->dropColumn('birthday');
             $table->dropColumn('provider_id');
             $table->dropColumn('avatar');

@@ -15,6 +15,8 @@ interface AbstractRepository
 
     public function show($id);
 
+    public function edit($id);
+
     public function update($id, array $data);
 
     public function destroy($id);

@@ -9,11 +9,11 @@ class Comment extends Model
     protected $table = 'comments';
 
     protected $fillable = [
-        'post_id',
+        'commentable_id',
+        'commentable_type',
         'user_id',
         'content',
         'parent_id',
-        'status',
         'created_at',
         'updated_at',
     ];
@@ -28,6 +28,11 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
@@ -35,6 +40,6 @@ class Comment extends Model
 
     public function scopeGetById($query, $id)
     {
-        return $query->where('post_id', $id)->get();
+        return $query->where('commentable_id', $id)->get();
     }
 }

@@ -17,9 +17,8 @@ class TagsTableSeeder extends Seeder
 
         for ($i = 0; $i < $limit; $i++) {
             DB::table('tags')->insert([
-                'name' => $faker->unique()->sentence($nbWords = 2),
-                'slug' => $faker->unique()->slug(2),
-                'status' => 1,
+                'name' => $faker->unique()->sentence($nbWords = 1),
+                'slug' => $faker->unique()->slug(1),
                 'view' => 0,
             ]);
         }

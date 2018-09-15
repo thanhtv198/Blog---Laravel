@@ -1,111 +1,105 @@
-@extends('admin/layouts/index') 
+@extends('admin/layouts/index')
 @section('content')
-<!-- <example></example> -->
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Data Tables</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Data Tables</li>
-                </ol>
+    <!-- <example></example> -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Data Tables</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Data Tables</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- /.container-fluid -->
-</section>
-<section class="content">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Data Table With Full Features</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
+        <!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Table With Full Features</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
                             <tr>
                                 <th>{{ trans('en.form.name') }}</th>
                                 <th>{{ trans('en.form.title') }}</th>
-                                <th>{{ trans('en.form.image') }}</th>
+                                <th>{{ trans('en.form.view') }}</th>
                                 <th>{{ trans('en.form.content') }}</th>
                                 <th>{{ trans('en.form.status') }}</th>
                                 <th>{{ trans('en.form.action') }}</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             @foreach($posts as $post)
-                            <tr>
-                                <td>{{ $post->user->name}}</td>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->image }}</td>
-                                <td>
+                                <tr id="row-{{ $post->id }}">
+                                    <td>{{ $post->user->name}}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->view }}</td>
+                                    <td>
                                     <span class="more">
-                                        {{ $post->content }}
+                                        {!! $post->content !!}
                                         </span>
-                                </td>
-                                <td>
-                                    @if ($post->status == 1)
-                                    <span class="right badge badge-success active-{{ $post->id }}">Activating</span>
-                                    <br>
-                                    <hr>
-                                    <i class="reject-{{ $post->id }}" id="status-reject-now">
+                                    </td>
+                                    <td>
+                                        @if ($post->status == 1)
+                                            <span class="right badge badge-success active-{{ $post->id }}">Activating</span>
+                                            <br>
+                                            <hr>
+                                            <i class="reject-{{ $post->id }}" id="status-reject-now">
                                                 <p class="show_input reject-font" id="reason{{ $post->id }}">
                                                     <span class="right badge badge-danger">Reject Now</span>
                                                 </p>
                                             </i>
-                                    <div id="show{{ $post->id }}" class="hidd" style="display: none; ">
-                                        {!! Form::text('reason', null, ['id' => "rea$post->id"]) !!} {!! Form::hidden('url', config('blog.base_url'), ['id'
+                                            <div id="show{{ $post->id }}" class="hidd" style="display: none; ">
+                                                {!! Form::text('reason', null, ['id' => "rea$post->id"]) !!} {!! Form::hidden('url', config('blog.base_url'), ['id'
                                         => 'url']) !!}
-                                        <span href="javascript:void(0)" data-url="{{ route('admin.posts.inactive', $post->id) }}" class="reject-font send" id="re{{ $post->id }}">
+                                                <span href="javascript:void(0)" data-url="{{ route('admin.posts.inactive', $post->id) }}"
+                                                      class="reject-font send" id="re{{ $post->id }}">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                             </span>
-                                    </div>
-                                    @else
-                                    <p class="show_input reject-font" id="reject-{{ $post->id }}">
-                                        <span class="right badge badge-danger">Rejected</span><br>
-                                        <span id="reason">{{ $post->reject_reason }}</span>
-                                        <hr>
-                                    </p>
-
-                                    <br>
-                                    <p>
-                                        <span class="right badge badge-success reject-font active-now" id="active-now-{{ $post->id }}" data-url="{{ route('admin.posts.active', $post->id) }}">Active Now</span>
-                                    </p>
-
-                                    @endif
-                                    <div id="text-show{{ $post->id }}" class="text-reason">
-                                    </div>
-
-                                </td>
-                                <td>
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                            <i class="fa fa-edit" aria-hidden="true" id="eye"></i>
-                                        </a>|
-                                    <a href="{{ route('posts.edit', $post->id) }}">
-                                            <i id="trash" class="fa fa-trash" aria-hidden="true">
-
-                                            </i>
-                                        </a>
-                                </td>
-                            </tr>
+                                            </div>
+                                        @else
+                                            <p class="show_input reject-font" id="reject-{{ $post->id }}">
+                                                <span class="right badge badge-danger">Rejected</span><br>
+                                                <span id="reason">{{ $post->reject_reason }}</span>
+                                            <hr>
+                                            </p>
+                                            <br>
+                                            <p>
+                                                <span class="right badge badge-success reject-font active-now" id="active-now-{{ $post->id }}"
+                                                      data-url="{{ route('admin.posts.active', $post->id) }}">Active Now</span>
+                                            </p>
+                                        @endif
+                                        <div id="text-show{{ $post->id }}" class="text-reason">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="del-post" id="{{ $post->id }}" data-url="{{ route('admin.posts.destroy', $post->id) }}">
+                                            <button type="button" class="btn btn-block btn-outline-danger btn-sm">Delete</button>
+                                        </p>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
+            <!-- /.col -->
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section>
+        <!-- /.row -->
+    </section>
 @endsection
 
 <style>
@@ -115,6 +109,7 @@
 
     .morelink {
         display: block;
+        color: blue!important;
     }
 
     .reject-font {
@@ -186,7 +181,7 @@
                 $("#show" + id).show("slow");
             });
             //send
-            $(".send").click(function (e){
+            $(".send").click(function (e) {
                 var id = $(this).attr('id').substring(2);
                 var href = ($(this).attr('data-url'));
                 var reason = $('#rea' + id).val();
@@ -232,4 +227,24 @@
             });
         });
 
+    //delete user
+    $(document).ready(
+        function () {
+            $(document).on('click', '.del-post', function (e) {
+                if(confirm('Delete !')){
+                    let id = $(this).attr('id');
+                    $('#row-' + id).remove();
+                    let url = $(this).attr('data-url');
+                    // alert(url);
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',  // user.destroy
+                        success: function (result) {
+
+                            // confirm('Delete Success!')
+                        }
+                    });
+                }
+            })
+        });
 </script>

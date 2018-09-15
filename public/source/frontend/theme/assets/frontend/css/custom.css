@@ -1,0 +1,95 @@
+/*ckeditor*/
+.cke_contents {
+    height: 350px !important;
+}
+
+/*sidebar recent post*/
+.title-recent-post-sidebar{
+    overflow: hidden;
+    height: 2.5em;
+    font-size: 15px!important;
+}
+/*sidebar recent topic*/
+.title-topic-choose{
+    color:#E84D1C!important;
+}
+/*header icon*/
+.nav-icon{
+    font-size: 20px;
+}
+/*user icon*/
+li .user-icon{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+li .user-icon:hover{
+    background: red;
+    color:orangered;
+}
+
+.dropdown-user{
+    min-width: 135px;
+}
+
+.sticky {
+    position: fixed;
+    top: -10px;
+    width: 100%;
+}
+
+/*searchbar*/
+[view=search] {
+    height: 29.5px;
+    margin-bottom: 1px;
+}
+
+[view=header] .main .search-bar {
+    display: flex;
+    margin-top: 21px;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 15px;
+    flex: 1 1 auto;
+    margin-left: 30px;
+    /* margin-right: 50px; */
+    border-radius: 7px;
+    box-shadow: 2px 2px 14px 2px rgba(5, 5, 13, 0.2);
+    background: white;
+    position: relative;
+}
+
+[view=header] .main .search-bar input {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    flex: 1 1 auto;
+    font-family: Lato;
+    font-size: 16px;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+[view=header] .main form {
+    flex: 1 1 auto;
+    max-width: 400px;
+}
+
+[view=header] .main .search-bar .fa-search {
+    display: flex;
+    height: 100%;
+    width: 18%;
+    flex: 0 0 auto;
+    align-items: center;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: absolute;
+    right: 0;
+    border: none;
+    outline: none;
+    background: #f3565d;
+}

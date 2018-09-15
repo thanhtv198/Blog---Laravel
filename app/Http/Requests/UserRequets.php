@@ -27,7 +27,6 @@ class UserRequets extends FormRequest
             'email' => 'required|email',
             'password' => 'required|min:6',
             'name' => 'required|max:255',
-            'birthday' => 'required',
         ];
     }
 
@@ -35,7 +34,6 @@ class UserRequets extends FormRequest
     {
         return [
             'name.required' => trans('en.validate.name'),
-            'birthday.required' => trans('en.validate.birthday'),
             'email.required' => trans('en.validate.email'),
             'email.email' => trans('en.validate.valid_email'),
             'password.required' => trans('en.validate.password'),

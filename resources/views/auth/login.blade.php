@@ -2,7 +2,7 @@
 @section('content')
     <div class="main">
         <div class="omb_login">
-            <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+            <h3 class="omb_authTitle">Login or <a href="{{ route('register') }}">Sign up</a></h3>
             <div class="row omb_row-sm-offset-3">
                 <div class="col-xs-12 col-sm-6">
                         {!! Form::open(['route' => 'login', 'method' => 'post', 'class' => 'omb_loginForm']) !!}
@@ -16,7 +16,7 @@
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                             {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('en.form.password')]) !!}
                         </div>
-                        <span class="help-block">Password error</span>
+                        <span class="help-block"></span><br>
                         {{ Form::submit(trans('en.button.login'), ['class' => 'btn btn-lg btn-primary btn-block']) }}
                     {{ Form::close() }}
                 </div>
@@ -55,12 +55,6 @@
                     </a>
                 </div>
             </div>
-
-            <div class="row omb_row-sm-offset-3 omb_loginOr">
-                <div class="col-xs-12 col-sm-6">
-                    <a href="#">Sign up here</a>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -68,7 +62,9 @@
 <style>
     body { padding: 2em; }
 
-
+    .checkbox{
+        margin-left: 20px;
+    }
     /* Shared */
     .btn-lg{
 
@@ -103,7 +99,6 @@
     .loginBtn:active {
         box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
     }
-
 
     /* Facebook */
     .loginBtn--facebook {

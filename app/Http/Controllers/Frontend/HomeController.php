@@ -44,7 +44,7 @@ class HomeController extends Controller
         if ($request->has('key')) {
             $data = Post::search($request->key)->paginate(2);
         } else {
-            $data = Post::paginate(2);
+            $data = Post::latest()->paginate(2);
         }
         
         return view('frontend.home', compact('data'));

@@ -57,7 +57,13 @@ License: You must have a valid license purchased only from themeforest (the abov
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/style-responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/themes/red.css') }}" rel="stylesheet" id="style-color">
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('source/frontend/theme/assets/frontend/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/frontend/theme/assets/frontend/css/custom.css') }}" rel="stylesheet">
+    <script src="{{ asset('source/frontend/theme/assets/global/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />--}}
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>--}}
+    <link rel="stylesheet" href="{{ asset('source/admin/plugins/select2/select2.css') }}">
+    <script src="{{ asset('source/admin/plugins/select2/select2.full.js') }}" type="text/javascript"></script>
+
     <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -80,10 +86,11 @@ License: You must have a valid license purchased only from themeforest (the abov
     @include('frontend/layouts/footer')
 <!-- ./wrapper -->
 <!-- jQuery -->
-
+    @yield('script')
     <!-- Load javascripts at bottom, this will reduce page load time -->
     <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
     <!--[if lt IE 9]>
+
     <script src="{{ asset('source/frontend/theme/assets/global/plugins/respond.min.js') }}"></script>
     <![endif]-->
     <script src="{{ asset('source/frontend/theme/assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
@@ -96,10 +103,23 @@ License: You must have a valid license purchased only from themeforest (the abov
     <script src="{{ asset('source/frontend/theme/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script><!-- pop up -->
 
     <script src="{{ asset('source/frontend/theme/assets/frontend/layout/scripts/layout.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('source/frontend/theme/assets/frontend/js/custom.js') }}" type="text/javascript"></script>
+
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();
             Layout.initTwitter();
+        });
+    </script>
+
+    <script>
+        CKEDITOR.replace('editor-post', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
         });
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->

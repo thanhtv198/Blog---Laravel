@@ -31,9 +31,32 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
+                    @if(!Auth::check())
                     <li><a href="{{ route('login') }}">Log In</a></li>
                     <li><a href="{{ route('register') }}">Registration</a></li>
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                    @else
+                        <li>
+                            <a href="javascript:;">
+                                <i class="nav-icon fa fa-bell-o"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="{{ route('posts.create') }}">
+                                <i class="nav-icon fa fa-edit"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                                <i class="nav-icon fa fa-user"></i>
+                                {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li class="user-icon"><a href="{{ route('users.timeline', auth()->user()->id) }}"><i class="nav-icon fa fa-user"></i>Timeline</a></li>
+                                <li class="user-icon"><a href="{{ route('users.show', auth()->user()->id) }}"><i class="nav-icon fa fa-cog"></i>My Account</a></li>
+                                <li class="user-icon"><a href="{{ route('logout') }}"><i class="nav-icon fa fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -53,52 +76,29 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Home
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Default</a></li>
-                        <li><a href="index-header-fix.html">Home with Header Fixed</a></li>
-                        <li><a href="index-without-topbar.html">Home without Top Bar</a></li>
-                    </ul>
-                </li>
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Mega Menu
-
+                        IT
                     </a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="header-navigation-content">
                                 <div class="row">
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Footwear</h4>
+                                    <div class="col-md-6 header-navigation-col">
+                                        <h4>Backend</h4>
                                         <ul>
                                             <li><a href="index.html">Astro Trainers</a></li>
                                             <li><a href="index.html">Basketball Shoes</a></li>
                                             <li><a href="index.html">Boots</a></li>
                                             <li><a href="index.html">Canvas Shoes</a></li>
-                                            <li><a href="index.html">Football Boots</a></li>
-                                            <li><a href="index.html">Golf Shoes</a></li>
-                                            <li><a href="index.html">Hi Tops</a></li>
-                                            <li><a href="index.html">Indoor Trainers</a></li>
                                         </ul>
                                     </div>
-                                 
-                                    <div class="col-md-4 header-navigation-col">
-                                        <h4>Accessories</h4>
+                                    <div class="col-md-6 header-navigation-col">
+                                        <h4>Frontend</h4>
                                         <ul>
                                             <li><a href="index.html">Belts</a></li>
                                             <li><a href="index.html">Caps</a></li>
                                             <li><a href="index.html">Gloves</a></li>
-                                        </ul>
-
-                                        <h4>Clearance</h4>
-                                        <ul>
-                                            <li><a href="index.html">Jackets</a></li>
-                                            <li><a href="index.html">Bottoms</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -108,92 +108,33 @@
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Pages
-
+                        English
                     </a>
-
                     <ul class="dropdown-menu">
-                        <li><a href="page-about.html">About Us</a></li>
-                        <li><a href="page-services.html">Services</a></li>
-                        <li><a href="page-prices.html">Prices</a></li>
-                      
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Features
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="feature-typography.html">Typography</a></li>
-                        <li><a href="feature-buttons.html">Buttons</a></li>
-                        <li><a href="feature-forms.html">Forms</a></li>
-
-                        <li class="dropdown-submenu">
-                            <a href="index.html">Multi level <i class="fa fa-angle-right"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="index.html">Second Level Link</a></li>
-                                <li><a href="index.html">Second Level Link</a></li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                                        Second Level Link
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index.html">Third Level Link</a></li>
-                                        <li><a href="index.html">Third Level Link</a></li>
-                                        <li><a href="index.html">Third Level Link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Portfolio
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="portfolio-4.html">Portfolio 4</a></li>
-                
-                    </ul>
-                </li>
-                <li class="dropdown active">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Blog
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li class="active"><a href="blog.html">Blog Page</a></li>
+                        <li class=""><a href="blog.html">Blog Page</a></li>
                         <li><a href="blog-item.html">Blog Item</a></li>
                     </ul>
                 </li>
-                <li><a href="shop-index.html" target="_blank">E-Commerce</a></li>
-                <li><a href="onepage-index.html" target="_blank">One Page</a></li>
-                <li><a href="http://keenthemes.com/preview/metronic/theme/templates/admin" target="_blank">Admin theme</a></li>
-
-                <!-- BEGIN TOP SEARCH -->
-                <li class="menu-search">
-                    <span class="sep"></span>
-                    <i class="fa fa-search search-btn"></i>
-                    <div class="search-box">
-                            {!! Form::open(['route' => 'search.post', 'method' => 'post']) !!}
-                            <div class="input-group">
-                                {!! Form::text('key', null, ['class' => 'form-control', 'placeholder' => trans('en.form.search')]) !!}
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">
-                                        trans('en.form.search')
-                                </button>
-                            </span>
-                            </div>
-                        {{ Form::close() }}}
-                    </div>
+                <li class="dropdowns">
+                    <a class=""  href="javascript:;">
+                        About us
+                    </a>
                 </li>
-                <!-- END TOP SEARCH -->
+               <li class="dropdown">
+                   <div class="search-tab">
+                       <div id="header" view="header">
+                           <div class="main">
+                               {!! Form::open(['route' => 'search.post', 'method' => 'get']) !!}
+                               <div class="search-bar">
+                                   {!! Form::text('key', null, ['id' => 'tags', 'onkeyup' => 'autoComplete()', 'placeholder' => trans('en.tag.search')]) !!}
+                                   {!! Form::button('', ['type' => 'submit', 'class' => 'fa fa-search', 'id' => 'tag' ]) !!}
+                                   {!! Form::hidden('url', config('app.url_base'), ['id' => 'url']) !!}
+                               </div>
+                               {{ Form::close() }}
+                           </div>
+                       </div>
+                   </div>
+               </li>
             </ul>
         </div>
         <!-- END NAVIGATION -->
@@ -201,15 +142,13 @@
 </div>
 <!-- Header END -->
 <style>
-    .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
 
+    }
 </style>
 <script>
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function () {
+        myFunction()
+    };
 
     var header = document.getElementById("header-scroll");
     var sticky = header.offsetTop;

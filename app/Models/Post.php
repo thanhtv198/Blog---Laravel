@@ -5,22 +5,25 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use Searchable;
-    use Sluggable;
+    use Searchable, Sluggable, SoftDeletes;
+
+    const VIEW = 0;
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
-        'description',
         'content',
         'status',
         'reject_reason',
-        'image',
         'view',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function user()
     {
@@ -39,7 +42,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 
     public function scopeGetRecent($query)

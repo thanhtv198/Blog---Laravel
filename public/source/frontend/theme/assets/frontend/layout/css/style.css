@@ -620,7 +620,7 @@ body.page-header-fixed {
 /* navigation content */
 .header-navigation-content {
   padding: 20px 30px;
-  min-width: 600px;
+  min-width: 400px;
 }
 .header-navigation-content .header-navigation-col {
 	padding: 0;

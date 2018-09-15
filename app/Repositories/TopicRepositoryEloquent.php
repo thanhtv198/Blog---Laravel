@@ -40,6 +40,11 @@ class TopicRepositoryEloquent extends AbstractRepositoryEloquent implements Topi
         ]);
     }
 
+    public function edit($id)
+    {
+        // TODO: Implement edit() method.
+    }
+
     public function update($id, array $data)
     {
         $topic = $this->model()->findOrFail($id)->update([

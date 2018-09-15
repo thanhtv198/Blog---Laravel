@@ -57,6 +57,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('source/admin/dist/js/demo.js') }}"></script>
 
+
 <!-- page script -->
 
 <script>

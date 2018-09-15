@@ -1,115 +1,118 @@
 @extends('admin/layouts/index')
 @section('content')
-<!-- <example></example> -->
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Members Information</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Data Tables</li>
-                </ol>
+    <!-- <example></example> -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Members Information</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Data Tables</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- /.container-fluid -->
-</section>
-<section class="content">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Data Table With Full Features</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
+        <!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Table With Full Features</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
                             <tr>
                                 <th>{{ trans('en.form.name') }}</th>
                                 <th>{{ trans('en.form.email') }}</th>
                                 <th>{{ trans('en.form.birthday') }}</th>
-                                <th>{{ trans('en.form.password') }}</th>
                                 <th>{{ trans('en.form.status') }}</th>
                                 <th>{{ trans('en.form.action') }}</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody id="user-table">
                             @foreach ($users as $user)
-                            <tr>
-                                <td>{{ $user->name}}</td>
-                                <td>{{ $user->email }}</td>
-                                <td></td>
-                                <td>{{ $user->birthday }}</td>
-                                <td>
-                                    @if ($user->status == 1)
-                                    <span class="right badge badge-success active-{{ $user->id }}">Activating</span>
-                                    <br>
-                                    <hr>
-                                    <i class="block-{{ $user->id }}" id="status-block-now">
+                                <tr id="row-{{ $user->id }}">
+                                    <td>{{ $user->name}}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->birthday }}</td>
+                                    <td>
+                                        @if ($user->status == 1)
+                                            <span class="right badge badge-success active-{{ $user->id }}">Activating</span>
+                                            <br>
+                                            <hr>
+                                            <i class="block-{{ $user->id }}" id="status-block-now">
                                                 <p class="show_input block-font" id="block-{{ $user->id }}">
                                                     <span class="right badge badge-danger">Block Now</span>
                                                 </p>
                                             </i>
-                                    <div id="show{{ $user->id }}" class="hidd" style="display: none; ">
-                                        {!! Form::text('reason', null, ['id' => "rea$user->id"]) !!} {!! Form::hidden('url', config('blog.base_url'), ['id'
+                                            <div id="show{{ $user->id }}" class="hidd" style="display: none; ">
+                                                {!! Form::text('reason', null, ['id' => "rea$user->id"]) !!} {!! Form::hidden('url', config('blog.base_url'), ['id'
                                         => 'url']) !!}
-                                        <span href="javascript:void(0)" data-url="{{ route('admin.users.inactive', $user->id) }}" class="block-font send" id="re{{ $user->id }}">
+                                                <span href="javascript:void(0)" data-url="{{ route('admin.users.inactive', $user->id) }}"
+                                                      class="block-font send" id="re{{ $user->id }}">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                             </span>
-                                    </div>
-                                    @else
-                                    <p class="show_input block-font" id="reason{{ $user->id }}">
-                                        <span class="right badge badge-danger">blocked</span><br>
-                                        <span id="reason">{{ $user->block_reason }}</span>
-                                        <hr>
-                                    </p>
+                                            </div>
+                                        @else
+                                            <p class="show_input block-font" id="reason{{ $user->id }}">
+                                                <span class="right badge badge-danger">blocked</span><br>
+                                                <span id="reason">{{ $user->block_reason }}</span>
+                                            <hr>
+                                            </p>
 
-                                    <br>
-                                    <p>
-                                        <span class="right badge badge-success block-font active-now" id="active-now-{{ $user->id }}" data-url="{{ route('admin.users.active', $user->id) }}">Active Now</span>
-                                    </p>
-
-                                    @endif
-                                    <div id="text-show{{ $user->id }}" class="text-reason">
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.users.show', $user->id) }}">
-                                            <i class="fa fa-edit" aria-hidden="true" id="eye"></i>
-                                        </a>|
-                                    <a href="{{ route('admin.users.edit', $user->id) }}">
-                                            <i id="trash" class="fa fa-trash" aria-hidden="true">
-
-                                            </i>
+                                            <br>
+                                            <p>
+                                                <span class="right badge badge-success block-font active-now" id="active-now-{{ $user->id }}"
+                                                      data-url="{{ route('admin.users.active', $user->id) }}">Active Now</span>
+                                            </p>
+                                        @endif
+                                        <div id="text-show{{ $user->id }}" class="text-reason">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.users.show', $user->id) }}">
+                                            {{--<i class="fa fa-user" aria-hidden="true" id="eye"> Profile</i>--}}
+                                            <button type="button" class="btn btn-block btn-outline-info btn-sm">Profile</button>
                                         </a>
-                                </td>
-                            </tr>
+                                        <hr>
+                                        <p class="del-user" id="{{ $user->id }}" data-url="{{ route('admin.users.destroy', $user->id) }}">
+                                            <button type="button" class="btn btn-block btn-outline-danger btn-sm">Delete</button>
+                                        </p>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
+            <!-- /.col -->
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section>
+        <!-- /.row -->
+    </section>
 @endsection
 <style>
-     .block-font {
+    .block-font {
         font-size: 15px;
         cursor: pointer
     }
 
     .text-reason {
         width: 120px;
+    }
+
+    .del-user {
+        cursor: pointer;
     }
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -129,7 +132,7 @@
                 $("#show" + id).show("slow");
             });
             //send
-            $(".send").click(function (e){
+            $(".send").click(function (e) {
                 var id = $(this).attr('id').substring(2);
                 var href = ($(this).attr('data-url'));
                 var reason = $('#rea' + id).val();
@@ -159,7 +162,7 @@
             $(".active-now").click(function (e) {
                 var id = $(this).attr('id').substring(11);
                 var href = ($(this).attr('data-url'));
-               
+
                 $.ajax({
                     type: 'post',
                     url: href,
@@ -173,4 +176,27 @@
                 $('#block-' + id).hide();
             });
         });
+
+    //delete user
+    $(document).ready(
+        function () {
+            $(document).on('click', '.del-user', function (e) {
+                if(confirm('Delete !')){
+                    let id = $(this).attr('id');
+                    $('#row-' + id).remove();
+                    let url = $(this).attr('data-url');
+                    // alert(url);
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',  // user.destroy
+                        success: function (result) {
+
+                            // confirm('Delete Success!')
+                        }
+                    });
+                }
+            })
+        });
+
+
 </script>
