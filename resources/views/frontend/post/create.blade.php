@@ -1,11 +1,9 @@
 @extends('frontend/layouts/index')
-
 @section('content')
-
     <div class="main">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">{{ trans('en.title.home') }}</a></li>
                 <li><a href="javascript:;">Blog</a></li>
                 <li class="active">Blog Item</li>
             </ul>
@@ -31,16 +29,6 @@
             <hr>
         </div>
     </div>
-
 @stop
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".select2").select2({
-            tags: true,
-            tokenSeparators: [',', ' ']
-        });
-    });//document ready
-</script>
 

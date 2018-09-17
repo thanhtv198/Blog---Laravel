@@ -4,8 +4,7 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
-
+            <p class="login-box-msg">{{ trans('en.auth.sign_in_to_start_session') }}</p>
             {!! Form::open(['route' => 'admin.login', 'method' => 'post']) !!}
             <div class="form-group has-feedback">
                 {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => trans('en.form.email')]) !!}
@@ -20,8 +19,7 @@
                     <div class="checkbox icheck">
                         <label>
                             {!! Form::checkbox('remember', old('remember') ? 'checked' : '' , ['id' => 'remember']) !!}
-                            Remember me
-
+                            {{ trans('en.auth.rememberme') }}
                         </label>
                     </div>
                 </div>

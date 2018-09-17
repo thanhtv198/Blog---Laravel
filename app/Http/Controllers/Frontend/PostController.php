@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\Repositories\PostRepository;
 use App\Contracts\Repositories\TagRepository;
+use App\Contracts\Repositories\UserRepository;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Comment;
-use App\Models\Post;
+use App\Notifications\NewPostNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Notification;
 
 class PostController extends Controller
 {
@@ -18,10 +20,17 @@ class PostController extends Controller
 
     protected $tagRepository;
 
-    public function __construct(PostRepository $repository, TagRepository $tagRepository)
+    protected $userRepository;
+
+    public function __construct(
+        PostRepository $repository,
+        TagRepository $tagRepository,
+        UserRepository $userRepository
+    )
     {
         $this->repository = $repository;
         $this->tagRepository = $tagRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -61,6 +70,10 @@ class PostController extends Controller
         $post = $this->repository->store($data);
 
         $this->tagRepository->saveTagsByPost($request->tags, $post->id);
+
+        $admins = $this->userRepository->getAdmin();
+
+        Notification::send($admins, new NewPostNotification($post));
 
         return redirect()->route('home');
     }

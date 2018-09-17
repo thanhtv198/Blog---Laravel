@@ -25,8 +25,8 @@ class PostsTableSeeder extends Seeder
                 'view' => config('blog.post.view'),
             ]);
 
-            $post->tags()->sync($faker->numberBetween(1,10));
-            $post->topics()->sync($faker->numberBetween(1,10));
+            $post->tags()->sync($faker->numberBetween(1, 10));
+            $post->topics()->sync($faker->numberBetween(1, 5));
         }
     }
 }

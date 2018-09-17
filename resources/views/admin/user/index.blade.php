@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Members Information</h1>
+                    <h1>{{ trans('en.title.member_index') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Data Tables</li>
+                        <li class="breadcrumb-item"><a href="#">{{ trans('en.title.home') }}</a></li>
+                        <li class="breadcrumb-item active">{{ trans('en.title.member_index') }}</li>
                     </ol>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data Table With Full Features</h3>
+                        <h3 class="card-title">{{ trans('en.title.member_index_card') }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -43,35 +43,39 @@
                                     <td>{{ $user->name}}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->birthday }}</td>
-                                    <td>
+                                    <td id="status-{{ $user->id }}">
                                         @if ($user->status == 1)
-                                            <span class="right badge badge-success active-{{ $user->id }}">Activating</span>
+                                            <span class="right badge badge-success badge-status active-{{ $user->id }}">
+                                                {{ trans('en.form.activating') }}
+                                            </span>
                                             <br>
                                             <hr>
-                                            <i class="block-{{ $user->id }}" id="status-block-now">
-                                                <p class="show_input block-font" id="block-{{ $user->id }}">
-                                                    <span class="right badge badge-danger">Block Now</span>
+                                            <i class="reject-{{ $user->id }}" id="status-block-now">
+                                                <p class="show_input block-font" id="reason{{ $user->id }}">
+                                                    <span class="right badge badge-danger badge-status">{{ trans('en.form.block_now') }}</span>
                                                 </p>
                                             </i>
                                             <div id="show{{ $user->id }}" class="hidd" style="display: none; ">
-                                                {!! Form::text('reason', null, ['id' => "rea$user->id"]) !!} {!! Form::hidden('url', config('blog.base_url'), ['id'
-                                        => 'url']) !!}
+                                                {!! Form::text('reason', null, ['id' => "rea$user->id"]) !!}
+                                                {!! Form::hidden('url', config('blog.base_url'), ['id' => 'url']) !!}
                                                 <span href="javascript:void(0)" data-url="{{ route('admin.users.inactive', $user->id) }}"
                                                       class="block-font send" id="re{{ $user->id }}">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                             </span>
                                             </div>
                                         @else
-                                            <p class="show_input block-font" id="reason{{ $user->id }}">
-                                                <span class="right badge badge-danger">blocked</span><br>
-                                                <span id="reason">{{ $user->block_reason }}</span>
-                                            <hr>
-                                            </p>
-
-                                            <br>
+                                            <p class="show_input block-font" id="reject-{{ $user->id }}">
+                                                <span class="right badge badge-danger badge-status">
+                                                    {{ trans('en.form.blocked') }}
+                                                </span><br>
+                                                <span id="reason">{{ $user->block_reason }}</span><hr>
+                                            </p><br>
                                             <p>
-                                                <span class="right badge badge-success block-font active-now" id="active-now-{{ $user->id }}"
-                                                      data-url="{{ route('admin.users.active', $user->id) }}">Active Now</span>
+                                                <span class="right badge badge-success block-font badge-status active-now"
+                                                      id="active-now-{{ $user->id }}"
+                                                      data-url="{{ route('admin.users.active', $user->id) }}">
+                                                    {{ trans('en.form.active_now') }}
+                                                </span>
                                             </p>
                                         @endif
                                         <div id="text-show{{ $user->id }}" class="text-reason">
@@ -79,12 +83,12 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.users.show', $user->id) }}">
-                                            {{--<i class="fa fa-user" aria-hidden="true" id="eye"> Profile</i>--}}
-                                            <button type="button" class="btn btn-block btn-outline-info btn-sm">Profile</button>
+                                            <button type="button"
+                                                    class="btn btn-block btn-outline-info btn-sm">{{ trans('en.button.profile') }}</button>
                                         </a>
                                         <hr>
-                                        <p class="del-user" id="{{ $user->id }}" data-url="{{ route('admin.users.destroy', $user->id) }}">
-                                            <button type="button" class="btn btn-block btn-outline-danger btn-sm">Delete</button>
+                                        <p class="del-button" id="{{ $user->id }}" data-url="{{ route('admin.users.destroy', $user->id) }}">
+                                            <button type="button" class="btn btn-block btn-outline-danger btn-sm">{{ trans('en.button.delete') }}</button>
                                         </p>
                                     </td>
                                 </tr>
@@ -101,102 +105,3 @@
         <!-- /.row -->
     </section>
 @endsection
-<style>
-    .block-font {
-        font-size: 15px;
-        cursor: pointer
-    }
-
-    .text-reason {
-        width: 120px;
-    }
-
-    .del-user {
-        cursor: pointer;
-    }
-</style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript">
-    //block user
-    $(document).ready(
-        function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $(".show_input").click(function (e) {
-                //get from charecter 6 -> id
-                var id = $(this).attr('id').substring(6);
-                $('.hidd').hide();
-                $("#show" + id).show("slow");
-            });
-            //send
-            $(".send").click(function (e) {
-                var id = $(this).attr('id').substring(2);
-                var href = ($(this).attr('data-url'));
-                var reason = $('#rea' + id).val();
-
-                $.ajax({
-                    type: 'post',
-                    url: href,
-                    data: {reason: reason},
-                    dataType: 'json',
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
-
-                $("#text-show" + id).html(reason);
-                $("#text-show" + id).before(' <span class="right badge badge-danger block-font">blocked</span> ');
-                $('.hidd').hide();
-                $('.active-' + id).hide();
-                $('.block-' + id).hide();
-            });
-
-        });
-
-    //active now
-    $(document).ready(
-        function () {
-            $(".active-now").click(function (e) {
-                var id = $(this).attr('id').substring(11);
-                var href = ($(this).attr('data-url'));
-
-                $.ajax({
-                    type: 'post',
-                    url: href,
-                    success: function () {
-                    }
-                });
-
-                $("#text-show" + id).append(' <span class="right badge badge-success block-font">Activing</span>');
-                $('#active-now-' + id).hide();
-                $('.reason-' + id).hide();
-                $('#block-' + id).hide();
-            });
-        });
-
-    //delete user
-    $(document).ready(
-        function () {
-            $(document).on('click', '.del-user', function (e) {
-                if(confirm('Delete !')){
-                    let id = $(this).attr('id');
-                    $('#row-' + id).remove();
-                    let url = $(this).attr('data-url');
-                    // alert(url);
-                    $.ajax({
-                        url: url,
-                        type: 'DELETE',  // user.destroy
-                        success: function (result) {
-
-                            // confirm('Delete Success!')
-                        }
-                    });
-                }
-            })
-        });
-
-
-</script>

@@ -1,9 +1,9 @@
 <aside class="main-sidebar elevation-4 sidebar-light-primary">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link bg-white">
+    <a href="#" class="brand-link bg-white">
         <img src="{{ asset('source/admin/dist/img/AdminLTELogo.png') }}" alt="" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">{{ trans('en.sidebar.title') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
                 <img src="{{ asset('source/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ auth::user()->name }}</a>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>
-                            Dashboard
+                            {{ trans('en.sidebar.dashboard') }}
                         </p>
                     </a>
                 </li>
@@ -35,15 +35,15 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
-                            Accounts
-                            <i class="fa fa-angle-left right"></i>
+                            {{ trans('en.sidebar.account') }}
+                            <span class="right badge badge-danger">2</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.users.index') }}" class="nav-link">
                                 <i class="fa fa-user-circle-o"></i>
-                                <p>Members Page</p>
+                                <p>{{ trans('en.sidebar.menber') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -52,15 +52,24 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-sticky-note-o"></i>
                         <p>
-                            Posts
-                            <span class="right badge badge-danger">New</span>
+                            {{ trans('en.sidebar.topic') }}
+                            <span class="right badge badge-danger">2</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-sticky-note-o"></i>
+                        <p>
+                            {{ trans('en.sidebar.post') }}
+                            <span class="right badge badge-danger">2</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.posts.index') }}" class="nav-link">
                                 <i class="fa fa-edit"></i>
-                                <p>View All Posts</p>
+                                <p>{{ trans('en.sidebar.all_post') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -69,8 +78,8 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-question-circle"></i>
                         <p>
-                            Questions
-                            <span class="right badge badge-danger">New</span>
+                            {{ trans('en.sidebar.question') }}
+                            <span class="right badge badge-danger">3</span>
                         </p>
                     </a>
                 </li>
@@ -78,8 +87,8 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-tag"></i>
                         <p>
-                            Tags
-                            <span class="right badge badge-danger">New</span>
+                            {{ trans('en.sidebar.tag') }}
+                            <span class="right badge badge-danger">2</span>
                         </p>
                     </a>
                 </li>

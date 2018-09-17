@@ -3,7 +3,7 @@
     <div class="main">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">{{ trans('en.title.home') }}</a></li>
                 <li><a href="javascript:;">Blog</a></li>
                 <li class="active">Blog Item</li>
             </ul>
@@ -12,23 +12,21 @@
                 <!-- BEGIN CONTENT -->
                 <div class="col-md-12 col-sm-12">
                     <div class="col-md-9">
-                        {{--<div class="pull-left">--}}
-                            {{--<h1>Blog Item</h1>--}}
-                        {{--</div>--}}
                         @if($post->user->id == auth()->user()->id)
-                        <div class="pull-right">
-                            <li class="edit-in-detail"><a href="{{ route('posts.edit', $post->id) }}">
-                                    <i class="nav-icon fa fa-pencil"></i> Edit
-                                </a>
-                            </li>
-                        </div>
+                            <div class="pull-right">
+                                <li class="edit-in-detail">
+                                    <a href="{{ route('posts.edit', $post->id) }}">
+                                        <i class="nav-icon fa fa-pencil"></i>
+                                        {{ trans('en.button.edit') }}
+                                    </a>
+                                </li>
+                            </div>
                         @endif
                     </div>
                     <div class="content-page">
                         <div class="row">
                             <!-- BEGIN LEFT SIDEBAR -->
                             <div class="col-md-9 col-sm-9 blog-item">
-
                                 <h2><p>{{ $post->title }}</p></h2>
                                 <ul class="blog-info">
                                     <li><i class="fa fa-user"></i>By admin</li>
@@ -36,7 +34,10 @@
                                     <li><i class="fa fa-eye"></i>{{ $post->view }}</li>
                                     <li>
                                         @foreach($post->tags_name as $tag)
-                                            <a href="javascript:;"><i class="fa fa-tags"></i> {{ $tag[0]['name'] }}</a>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-tags"></i>
+                                                {{ $tag[0]['name'] }}
+                                            </a>
                                         @endforeach
                                     </li>
                                 </ul>
@@ -50,18 +51,18 @@
                                 </div>
                                 <p>{!! $post->content !!}</p>
                                 <div class="post-comment padding-top-40">
-                                    <h3>Leave a Comment</h3>
+                                    <h3>{{ trans('en.tag.leave_comment') }}</h3>
                                     <div class="form-group">
-                                        <label>Message</label>
+                                        <label>{{ trans('en.tag.message') }}</label>
                                         <textarea class="form-control" name="content_parent_comment" rows="8"></textarea>
                                     </div>
                                     <p>
-                                        <button class="btn btn-primary parent-comment" data-url="{{ url('posts/'.$post->id.'/comments') }}">Post a
-                                            Comment
+                                        <button class="btn btn-primary parent-comment" data-url="{{ url('posts/'.$post->id.'/comments') }}">
+                                            {{ trans('en.button.comment') }}
                                         </button>
                                     </p>
                                 </div>
-                                <h2>Comments</h2>
+                                <h2>{{ trans('en.tag.comments') }}</h2>
                                 <div class="comments">
                                     {!! Form::hidden('username', auth()->user()->name) !!}
                                     @foreach ($comments as $comment)
@@ -75,14 +76,21 @@
                                                         <strong>
                                                             {{ $comment->user->name }}
                                                         </strong>
-                                                        <span>{{ $comment->created_at }} / <a class="reply-parent" id="{{ $comment->id }}">Reply</a></span>
+                                                        <span>
+                                                            {{ $comment->created_at }} /
+                                                            <a class="reply-parent" id="{{ $comment->id }}">
+                                                                {{ trans('en.button.reply') }}
+                                                            </a>
+                                                        </span>
                                                     </h4>
                                                     <p>{{ $comment->content }}</p>
                                                     <div class="input-group input-{{ $comment->id }}" style="display: none">
-                                                        <input type="text" class="form-control content-reply" id="comment-{{ $comment->id }}" name="content-reply">
+                                                        <input type="text" class="form-control content-reply" id="comment-{{ $comment->id }}"
+                                                               name="content-reply">
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success reply-button" id="rep{{ $comment->id }}" data-url="{{ url('posts/'.$post->id.'/replies') }}">
-                                                                Reply
+                                                            <button class="btn btn-success reply-button" id="rep{{ $comment->id }}"
+                                                                    data-url="{{ url('posts/'.$post->id.'/replies') }}">
+                                                                {{ trans('en.button.reply') }}
                                                             </button>
                                                         </span>
                                                     </div>
@@ -110,16 +118,16 @@
                                     @endforeach
                                 </div>
                                 <br><br>
-                                <h2 class="text-left">Use Facebook Comment</h2>
+                                <hr>
+                                <h2 class="text-left">{{ trans('en.tag.comment_by_facebook') }}</h2>
                                 <div class="comment">
                                     <div class="media">
-                                        <div class="fb-comments" data-href="https://www.facebook.com/thanhtv.198" data-width="100%" data-numposts="2">
+                                        <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="2">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- END LEFT SIDEBAR -->
-
                             <!-- BEGIN RIGHT SIDEBAR -->
                         @include('frontend/layouts/sidebar')
                         <!-- END RIGHT SIDEBAR -->

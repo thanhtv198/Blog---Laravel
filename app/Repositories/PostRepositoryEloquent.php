@@ -54,7 +54,7 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
             ]);
         }
 
-        $tagsName = array_slice($tagsName, 0, 2);
+        $tagsName = array_slice($tagsName, 0, config('blog.post.tagInDetail'));
 
         $post->setAttribute('tags_name', $tagsName);
 

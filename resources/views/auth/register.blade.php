@@ -2,7 +2,9 @@
 @section('content')
     <div class="main">
         <div class="omb_login">
-            <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+            <h3 class="omb_authTitle">
+                <a>{{ trans('en.auth.sign_up') }}</a>
+            </h3>
             <div class="row omb_row-sm-offset-3">
                 <div class="col-xs-12 col-sm-6">
                     {!! Form::open(['route' => 'register', 'method' => 'post', 'class' => 'omb_loginForm']) !!}
@@ -47,7 +49,7 @@
                 <div class="col-xs-4 col-sm-2">
                     <a href="{{ url('login/facebook') }}" class="btn btn-lg btn-block omb_btn-facebook loginBtn loginBtn--facebook">
                         <i class="fa fa-facebook visible-xs"></i>
-                        <span class="hidden-xs">Sign up facebook</span>
+                        <span class="hidden-xs">{{ trans('en.auth.sign_up_facebook') }}</span>
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-2">
@@ -55,7 +57,7 @@
                 <div class="col-xs-6 col-sm-2">
                     <a href="{{ url('login/google') }}" class="btn btn-lg btn-block omb_btn-google loginBtn loginBtn--google">
                         <i class="fa fa-google-plus visible-xs"></i>
-                        <span class="hidden-xs">Sign up google+</span>
+                        <span class="hidden-xs">{{ trans('en.auth.sign_up_google') }}</span>
                     </a>
                 </div>
             </div>

@@ -15,4 +15,6 @@ interface UserRepository extends AbstractRepository
     public function getQuestions($id);
 
     public function updateUser($id, $newPass, array $data);
+
+    public function getAdmin();
 }

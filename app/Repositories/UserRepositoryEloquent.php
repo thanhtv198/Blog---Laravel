@@ -159,5 +159,14 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     {
         return $this->model()->findOrFail($id)->posts;
     }
+
+    public function getAdmin()
+    {
+        $admins = $this->model()
+            ->where('role', config('blog.user.role.admin'))
+            ->get();
+
+        return $admins;
+    }
 }
 

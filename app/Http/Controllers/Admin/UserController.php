@@ -56,9 +56,9 @@ class UserController extends Controller
     {
         $user = $this->repository->show($id);
 
-        $posts = $user->posts()->paginate(2);
+        $posts = $user->posts()->paginate(config('blog.post.paginate'));
 
-        $questions = $user->questions()->paginate(3);
+        $questions = $user->questions()->paginate(config('blog.question.paginate'));
 
         return view('admin.user.detail', compact('user', 'posts', 'questions'));
     }

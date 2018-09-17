@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('source/admin/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{{ asset('source/admin/dist/css/custom.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div id="app">
@@ -56,6 +58,10 @@
 <script src="{{ asset('source/admin/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('source/admin/dist/js/demo.js') }}"></script>
+
+{{--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--}}
+
+<script src="{{ asset('source/admin/dist/js/custom.js') }}"></script>
 
 
 <!-- page script -->

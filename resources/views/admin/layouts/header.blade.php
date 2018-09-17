@@ -6,13 +6,9 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('home') }}" class="nav-link">Site Page</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{ route('home') }}" class="nav-link">{{ trans('en.header_admin.site_page') }}</a>
         </li>
     </ul>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
@@ -31,7 +27,7 @@
                                 Brad Diesel
                                 <span class="float-right text-sm text-danger"><i class="fa fa-star"></i></span>
                             </h3>
-                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm">Call</p>
                             <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 Hours Ago</p>
                         </div>
                     </div>
@@ -79,7 +75,7 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-warning navbar-badge">15</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="messages">
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">15 Notifications</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
@@ -87,50 +83,20 @@
                     <span class="float-right text-muted text-sm">3 mins</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fa fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fa fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-
+        <ul id="messages">
+        </ul>
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                        class="fa fa-th-large"></i></a>
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+                <i class="fa fa-th-large"></i>
+            </a>
         </li>
     </ul>
 </nav>
 <!-- /.navbar -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-<script>
-    $(document).ready(function(){
-        // Khởi tạo một đối tượng Pusher với app_key
-        var pusher = new Pusher('fcd7d713d2375ed850dd', {
-            cluster: 'ap1',
-            encrypted: true
-        });
-
-        //Đăng ký với kênh chanel-demo-real-time mà ta đã tạo trong file DemoPusherEvent.php
-        var channel = pusher.subscribe('notify-welcome');
-
-        //Bind một function addMesagePusher với sự kiện DemoPusherEvent
-        channel.bind('App\\Events\\NotifyWelcome', addMessageDemo);
-    });
-
-    //function add message
-    function addMessageDemo(data) {
-        console.log(data);
-        var liTag = $("<li class='list-group-item'>ggggg</li>");
-        liTag.html(data.message);
-        $('#messages').append(liTag);
-    }
-</script>
+@section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+@stop

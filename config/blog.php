@@ -36,9 +36,23 @@ return [
         'recent' => 5,
         'limit' => 10,
         'view' => 0,
+        'tagsInDetail' => 3,
     ],
 
-    //
+    //question
+    'question' => [
+        'status' => [
+            'inactive' => 0,
+            'active' => 1,
+        ],
+        'paginate' => 5,
+        'recent' => 5,
+        'limit' => 10,
+        'view' => 0,
+        'tagsInDetail' => 3,
+    ],
+
+    //tag
     'tag' => [
         'limit' => 20,
         'view' => 0,

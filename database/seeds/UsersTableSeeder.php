@@ -15,13 +15,22 @@ class UsersTableSeeder extends Seeder
 
         $limit = 20;
 
+        DB::table('users')->insert([
+            'name' => $faker->unique()->name,
+            'email' => 'thanh@gmail.com',
+            'role' => config('blog.user.role.admin'),
+            'birthday' => '2000-09-07',
+            'avatar' => '128.jpg',
+            'password' => bcrypt('123456'),
+        ]);
+
         for ($i = 0; $i < $limit; $i++) {
             DB::table('users')->insert([
                 'name' => $faker->unique()->name,
                 'email' => $faker->unique()->email,
-                'role' => config('blog.user.role.admin'),
+                'role' => config('blog.user.role.member'),
                 'birthday' => '2000-09-07',
-                'avatar' => 'https://s3.amazonaws.com/uifaces/faces/twitter/heyimjuani/128.jpg',
+                'avatar' => 'heyimjuani/128.jpg',
                 'password' => bcrypt('123456')
             ]);
         }

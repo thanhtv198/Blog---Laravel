@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome Email</title>
+    <title>{{ trans('en.mail.welcome_title') }}</title>
 </head>
  
 <body>
-    <h3>Thank you for registerd my website </h3>
-    <h3>Your email use to login is {{ $user['email'] }}</h3>
+    <h3>{{ trans('en.mail.welcome_thank') }}</h3>
+    <h3>{{ trans('en.mail.welcome_your_email') }} {{ $user['email'] }}</h3>
     <div class="message">
-        Your Registration was successful {{ $user['name']}}. Please login below
+        {{ trans('en.mail.welcome_register_success') }} {{ $user['name']}}.
+        {{ trans('en.mail.welcome_please_login') }}
         <br/>
-        <a href="{{ route('login') }}">Log in</a></div>
+        <a href="{{ route('login') }}">{{ trans('en.mail.welcome_login') }}</a></div>
 <br/>
 <br/>
 

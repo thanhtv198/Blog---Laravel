@@ -1,3 +1,42 @@
 .brand-link{
     background:#17a2b8;
 }
+
+/*icon badge status*/
+.badge-status{
+    font-size: 14px!important;
+}
+
+/*content hide image*/
+[view=post-user-detail] img{
+    display:none;
+}
+
+/*user index*/
+.block-font {
+    font-size: 15px;
+    cursor: pointer
+}
+
+.text-reason {
+    width: 120px;
+}
+
+.del-user {
+    cursor: pointer;
+}
+
+/*post index*/
+.morecontent span {
+    display: none;
+}
+
+.morelink {
+    display: block;
+    color: blue !important;
+}
+
+.reject-font {
+    font-size: 15px;
+    cursor: pointer
+}

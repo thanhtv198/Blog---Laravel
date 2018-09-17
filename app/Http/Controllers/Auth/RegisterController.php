@@ -76,7 +76,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'birthday' => $data['birthday'],
-            'status' => 1,
+            'role' => config('blog.user.role.admin'),
+            'status' => config('blog.user.status.active'),
         ]);
 
         Mail::to($user['email'])->send(new WelcomeMail($user));

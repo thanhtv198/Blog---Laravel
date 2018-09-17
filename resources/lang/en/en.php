@@ -9,15 +9,14 @@ return [
         'login' => 'Sign In',
         'logout' => 'Sign Out',
         'search' => 'Search',
-        'ship' => 'Deliver to this address',
         'save' => 'Save',
         'sign_up' => 'Sign Up',
-        'add_cart' => 'Add to cart',
         'update' => 'Update',
-        'order' => 'Order Now',
-        'delete_selected' => 'Delete Selected',
         'remove' => 'Remove',
         'send' => 'Send',
+        'profile' => 'Profile',
+        'comment' => 'Comment',
+        'reply' => 'Reply',
     ],
 
     //validate
@@ -31,14 +30,9 @@ return [
         'valid_password' => 'Passwords must be at least six characters.',
         'address' => 'The :attribute field must have a value.',
         'phone' => 'The :attribute field must have a value.',
-//        'news_title' => 'The :attribute field must have a value.',
-//        'news_content' => 'The :attribute field must have a value.',
-//        'news_image' => 'The :attribute field must have a value.',
-//        'news_size' => 'The :attribute size maximum 4096 byte.',
-//        'news_ext' => 'Image extention invalid',
-//        'content' => 'The :attribute field must have a value.',
-//        'local_id' => 'The city field must have a value.',
+        'content' => 'The :attribute field must have a value.',
     ],
+
     //login
     'login' => [
         'success' => 'Login success!',
@@ -55,161 +49,52 @@ return [
         'cancel_success' => 'Cancel success',
         'delete_message' => 'Delete failed',
         'permission' => 'You don\'t have permission',
-        'order_success' => 'Order Success!',
-        'order_empty' => 'Cart is empty',
-        'add_cart_success' => 'Add to cart success',
-        'more_compare' => 'Must have 2 product for compare',
-        'exists_compare' => 'Product have been exists in compare',
-        '3_product' => 'Product must be less than 3',
-        'type_price' => 'Please type price you want to search',
-        'no_product_bought' => 'You have no product bought',
-        'no_product_sold' => 'No product in sold',
-        'handle_success' => 'Handle success',
-        'no_order' => 'You have no order',
-        'send_success' => 'Send respond success!',
-        'login' => 'You have to login to do it',
-        'delete_error' => 'You can not delete yourself',
-        'delete_ept' => 'You have to choose user want to delete',
+    ],
 
-    ],
-    //tags
-    'tag' => [
-        //admin
-        'success' => 'Login success!',
-        'failed' => 'Login failed',
-        'welcome_login' => 'Welcome back ! Please sign in',
-        'sign_in' => 'Sign In',
-        'aside_admin_online' => 'Online',
-        'aside_admin_dashboard' => 'Dashboard',
-        'content_admin_dashboard' => 'Dashboard',
-        'aside_admin_product' => 'Product management',
-        'aside_admin_product_category' => 'Category',
-        'aside_admin_product_manufacture' => 'Manufacture',
-        'aside_admin_product_list_product' => 'List product',
-        'aside_admin_account' => 'Account',
-        'aside_admin_account_manager' => 'Manager',
-        'aside_admin_account_member' => 'Member',
-        'aside_admin_content' => 'Content',
-        'aside_admin_content_news' => 'News',
-        'aside_admin_interaction' => 'Interactions',
-        'aside_admin_interaction_respond' => 'Responds',
-        'aside_admin_interaction_comment' => 'Comments product',
-        'footer_admin_content' => 'Anything you want',
-        'header_admin_site_page' => 'Site Page',
-        'header_admin_home_page' => 'Home Page',
-        'header_admin_user' => 'Web deverloper',
-        'header_admin_sign_out' => 'Sign Out',
-        'search' => 'Search',
-        'title_site' => 'Framgia Shop',
-        'view_news' => 'View',
-        'cart_title' => 'Your Cart',
-        'shop' => 'Shop',
-        'compare_product' => 'Products Compare',
-        '404' => 'Error 404 - Page not found',
-        'aside_admin_content_slide' => 'Slides',
-    ],
     //form
     'form' => [
         'name' => 'Full name',
         'email' => 'Email',
         'address' => 'Address',
         'birthday' => 'Birthday',
-        'phone_number' => 'Phone',
         'password' => 'Password',
         'role' => 'Role',
         'repassword' => 'Retype paswword',
-        'action' => 'Action',
-        'stt' => 'Code',
-        'status' => 'Status',
-        'chose' => 'Check',
-        'note' => 'Note',
-        'price' => 'Price',
-        'manufacture' => 'Manufacture',
-        'description' => 'Description',
-        'promotion' => 'Promotion',
-        'category' => 'Category',
-        'image' => 'Image',
-
-
-
-    ],
-    //title_form
-    'title_form' => [
-        'login' => 'Welcome! Please sign in',
-        'account_manager_title' => 'Manager information',
-        'account_manager_head' => 'Manager management',
-        'account_member_title' => 'Member information',
-        'account_member_head' => 'Member management',
-        'category_head' => 'Category management',
-        'category_title' => 'Category infomation',
-        'product_head' => 'Product management',
-        'product_title' => 'Product infomation',
-        'manufacture_head' => 'Manufacture management',
-        'manufacture_title' => 'Manufacture infomation',
-        'respond_head' => 'Respond management',
-        'respond_title' => 'List respond',
-        'news_head' => 'News management',
-        'news_title' => 'List news',
-        'common_qty' => 'Common Quantity',
-        'check_product' => 'Check Product',
-        'slide_title' => 'list slide',
-        'slide_head' => 'Slide management',
-    ],
-    //product
-    'product' => [
-        'name' => 'Name',
-        'price' => 'Price',
-        'manufacture' => 'Manufacture',
-        'description' => 'Description',
-        'promotion' => 'Promotion',
-        'category' => 'Category',
-        'image' => 'Image',
         'status' => 'Status',
         'action' => 'Action',
-        'code' => 'Code',
-        'accept_now' => 'Accept now',
-        'accepted' => 'Accepted',
-        'parent_category' => 'Parent Category',
-        'qty' => 'Quantity',
-        'qty_image' => 'Image Qty',
-        'os' => 'Operation System',
-        'screen' => 'Screen',
-        'back_camera' => 'Back Camera (Px)',
-        'front_camera' => 'Front Camera (Px)',
-        'sim' => 'Sim',
-        'battery' => 'Battery (Mah)',
-        'cpu' => 'CPU',
-        'ram' => 'RAM (GB)',
-        'memory' => 'Memory (GB)',
-        'config' => 'Product Configuration',
-        'info' => 'Product Information',
-        'created_at' => 'Created at',
-        'order_id' => 'Order Code',
-        'price_one' => 'Price / 1 product',
-        'total' => 'Total',
-        'product' => 'Product',
-        'seller_info' => 'Seller Infomation',
-        'address_sell' => 'Address sell product ',
-    ],
-    //news
-    'news' => [
-        'title' => 'Title',
-        'content' => 'Content',
-        'image' => 'Image',
-    ],
-    //respond
-    'respond' => [
-        'check_now' => 'Check',
-        'pendding' => 'Pendding',
-        'checked' => 'Checked',
-        'handle_now' => 'Handle now',
-        'handled' => 'Handled',
-        'uncheck' => 'UnCheck',
+        'activating' => 'Activating',
+        'active_now' => 'Active Now',
+        'block_now' => 'Block Now',
+        'blocked' => 'Blocked',
         'rejected' => 'Rejected',
-        'reject_now' => 'Reject now',
-        'send_respond' => 'Send Your Respond',
-        'respond' => 'If you have any problem or you want to contribute to us, please put your respond for us',
+        'content' => 'Content',
+        'view' => 'Views',
+        'title' => 'Title',
     ],
+
+    //title_form
+    'title' => [
+        'home' => 'Home',
+        'member_index' => 'Member Infomation',
+        'member_index_card' => 'Detail member infomation',
+        'member_profile' => 'Profile',
+        'post_index' => 'post Infomation',
+        'post_index_card' => 'Detail post infomation',
+    ],
+
+    //tag
+    'tag' => [
+        'member_question' => 'Question',
+        'member_timeline' => 'Timeline',
+        'member_reputation' => 'Reputation',
+        'member_total_post' => 'Total post',
+        'member_total_question' => 'Total question',
+        'comments' => 'Comments',
+        'message' => 'Message',
+        'leave_comment' => 'Leave your comment',
+        'comment_by_facebook' => 'Comment use Facebook account',
+    ],
+
     //site footer
     'footer' => [
         'deliver' => 'Shipping to overseas',
@@ -222,106 +107,56 @@ return [
         'guarantee1' => 'We promise to deliver to you within 48 hours of confirming your order',
         'coppyright' => '© 2017 Grocery Shoppy. All rights reserved',
     ],
-    //home page
-    'home_page' => [
-        'head' => 'Product recommended for you',
-        'title11' => 'New Products',
-        'title12' => 'The best for you',
-        'title13' => 'List of featured products',
-        'title14' => 'Great promotion',
-        'title21' => 'New Products',
-        'title22' => 'Top View Products',
-        'search_result' => 'Product Found',
-        'result_quantity' => 'The number of product matches ',
-        'news_detail' => 'News Detail',
-        'view_product' => 'View detail',
-        'add_cart_success' => 'Add to cart success!',
-    ],
+
     //header
     'header' => [
         'phone' => '190041593',
         'sign_in' => 'Sign In',
-        'sign_up' => 'Sign Up',
-        'cart' => 'Cart',
-        'compare' => 'Compare',
-        'home' => 'Home Page',
-        'category' => 'Category',
-        'manufacture' => 'Manufacture',
-        'introduce' => 'Introduction',
-        'profile' => 'Profile',
-        'sell_product' => 'Posted for sale',
-        'sign_out' => 'Sign out',
     ],
-    //aside_content
-    'aside' => [
-        'search_here' => 'Search Here..',
-        'search_price' => 'Price (.000.000 đ)',
-        'search_local' => 'Search by local',
-        'from' => 'From',
-        'to' => 'To',
-        'news' => 'Phone news'
+
+    //side bar
+    'sidebar' => [
+        'title' => 'T\'s Blog' ,
+        'dashboard' => 'Dashboard',
+        'account' => 'Accounts',
+        'topic' => 'Topics',
+        'post' => 'Posts',
+        'all_post' => 'All posts',
+        'question' => 'Questions',
+        'tag' => 'Tags',
     ],
-    //site
-    'site' => [
-        'sign_up' => 'Sign Up New Account',
+
+    //mail
+    'mail' => [
+        'welcome_title' => 'Welcome to my website',
+        'welcome_thank' => 'Thank you for registerd my website',
+        'welcome_your_email' => 'Your email use to login is',
+        'welcome_register_success' => 'Your Registration was successful!',
+        'welcome_please_login' => 'Please login below!',
+        'welcome_login' => 'Login',
     ],
-    //product_detail
-    'product_detail' => [
-        'head' => 'Product Detail',
-        'views' => 'Views: ',
-        'manufacture' => 'Manufacture: ',
-        'category' => 'Category: ',
-        'date_manufacture' => 'Date Manufacture: ',
-        'description' => 'Description ',
-        'info' => 'Infomation ',
-        'detail' => 'Detail ',
-        'detail_head' => 'Detailed Configuration ',
-        'comment1' => 'Comments',
-        'comment' => 'Comment',
-        'login_to_comment' => 'You have to login to comment',
-        'login_to_rate' => 'You have to login to rating',
-        'replies' => 'replies',
-        'seller' => 'Seller',
+
+    //footer-admin
+    'footer_admin' => [
+        'copy' => 'Copyright &copy; 2014-2018 AdminLTE.io',
+        'version' => 'Version - 3.0.0',
     ],
-    //info
-    'info' => [
-        'head' => 'View your profile',
-        'buy_history' => 'View your history bought',
-        'order' => 'View your order',
-        'info_config' => 'Edit your profile',
+
+    //header-admin
+    'header_admin' => [
+        'site_page' => 'Site Page',
     ],
-    //sell
-    'sell' => [
-        'your_product' => 'Your pruduct',
-        'your_sold' => 'Your pruduct posted',
-        'price_promotion' => 'Price - Discount',
-        'date_create' => 'Date of post',
-        'correct_photo' => 'The product has correct photo',
-        'resonable_price' => 'The product is reasonably priced',
-        'resonable_name' => 'The product is reasonably named',
-    ],
-    //cart
-    'cart' => [
-        'product_in_cart' => 'Products in your cart',
-        'cart' => 'Your Cart',
-    ],
-    //checkout
-    'checkout' => [
-        'confirm' => 'Confirm your order',
-        'total' => 'Total price of your order: ',
-        'deliver' => 'Deliver to this address ',
-        'checkout' => 'Checkout',
-        'cart_empty' => 'Cart is empty',
-    ],
-    //sold
-    'sold' => [
-        'order_sold' => 'Sold orders',
-        'your_product_sold' => 'Your sold products',
-        'export' => 'Export file',
-    ],
-    //bought
-    'bought' => [
-        'order_bought' => 'Bought orders',
-        'your_product_bought' => 'Your bought products',
-    ],
+
+    //auth
+    'auth' => [
+        'login_or' => 'Login or',
+        'sign_up' => 'Sign up',
+        'rememberme' => 'Remember me',
+        'forgot_password' => 'Forgot password',
+        'login_use_facebook' => 'Login use facebook',
+        'sign_up_facebook' => 'Login use facebook',
+        'login_use_goole+' => 'Sign up google +',
+        'sign_up_goole' => 'Sign up google +',
+        'sign_in_to_start_session' => 'Sign in to start your session',
+    ]
 ];

@@ -62,7 +62,6 @@
         display:none;
     }
 
-
 </style>
 @section('script')
     <script src="{{ asset('source/frontend/theme/assets/frontend/js/jquery-1.9.1.js') }}" type="text/javascript"></script>
