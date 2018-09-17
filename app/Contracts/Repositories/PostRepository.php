@@ -17,4 +17,6 @@ interface PostRepository extends AbstractRepository
     public function comment($id, $data);
 
     public function reply($parentId, $data);
+
+    public function search($data);
 }

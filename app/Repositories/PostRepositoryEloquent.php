@@ -209,4 +209,15 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
 
         return $reply;
     }
+
+    public function search($data)
+    {
+        if (!is_null($data)) {
+            $result = $this->model()->search($data)->paginate(config('blog.post.paginate'));
+        } else {
+            $result = $this->model()->latest()->paginate(config('blog.post.paginate'));
+        }
+
+        return $result;
+    }
 }

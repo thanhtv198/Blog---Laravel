@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/login', 'UserController@login')->name('admin.login');
     Route::get('/logout', 'UserController@logout');
 
-    // route resource post
+    //route resource post
     Route::group(['as' => 'admin.'], function () {
         Route::resource('posts', 'PostController');
     });
@@ -51,11 +51,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
 //route frontend
 Route::group(['namespace' => 'Frontend'], function () {
-    // home
+    //home
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/search/posts', 'HomeController@searchPost')->name('search.post');
 
-    // route resource post
+    //route resource post
     Route::resource('posts', 'PostController');
 
     //comment posts
@@ -72,7 +72,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     //route resource tag
     Route::resource('tags', 'TagController');
 
-    //route resource tag
+    //route resource user
     Route::resource('users', 'UserController');
     Route::get('users/{id}/timeline', 'UserController@getTimeline')->name('users.timeline');
 });
