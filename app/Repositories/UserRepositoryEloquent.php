@@ -94,20 +94,6 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
         ]);
     }
 
-    public function updatePassword($id, $newPass)
-    {
-        $user = $this->model()->findOrFail($id);
-
-        $oldPass = $user->password;
-        if ($oldPass == $newPass) {
-            $newPass = $oldPass;
-        } else {
-            $newPass = bcrypt($newPass);
-        }
-
-        return $newPass;
-    }
-
     /**
      * Delete user and their posts
      *
@@ -174,3 +160,4 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
         return $this->model()->findOrFail($id)->posts;
     }
 }
+

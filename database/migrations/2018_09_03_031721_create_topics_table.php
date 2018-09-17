@@ -18,7 +18,7 @@ class CreateTopicsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug');
             $table->integer('parent_id')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(config('blog.topic.status.active'));
             $table->integer('quantity');
             $table->softDeletesTz();
             $table->timestamps();

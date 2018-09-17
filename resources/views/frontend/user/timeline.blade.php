@@ -34,7 +34,7 @@
                                         <li><i class="fa fa-calendar"></i>{{ $row->created_at }}</li>
                                         <li><i class="fa fa-eye"></i>{{ $row->view }}</li>
                                     </ul>
-                                    <p  class="content-post">{{ $row->content }}</p>
+                                    <p  class="content-post">{!! $row->content !!}</p>
                                     @endforeach
                                 </div>
                             </div>

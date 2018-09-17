@@ -17,8 +17,8 @@
                         {{--</div>--}}
                         @if($post->user->id == auth()->user()->id)
                         <div class="pull-right">
-                            <li><a href="{{ route('posts.edit', $post->id) }}">
-                                    <i class="nav-icon fa fa-edit"></i> Edit
+                            <li class="edit-in-detail"><a href="{{ route('posts.edit', $post->id) }}">
+                                    <i class="nav-icon fa fa-pencil"></i> Edit
                                 </a>
                             </li>
                         </div>
@@ -49,7 +49,6 @@
                                     @endif
                                 </div>
                                 <p>{!! $post->content !!}</p>
-
                                 <div class="post-comment padding-top-40">
                                     <h3>Leave a Comment</h3>
                                     <div class="form-group">
@@ -62,7 +61,6 @@
                                         </button>
                                     </p>
                                 </div>
-
                                 <h2>Comments</h2>
                                 <div class="comments">
                                     {!! Form::hidden('username', auth()->user()->name) !!}
@@ -80,7 +78,6 @@
                                                         <span>{{ $comment->created_at }} / <a class="reply-parent" id="{{ $comment->id }}">Reply</a></span>
                                                     </h4>
                                                     <p>{{ $comment->content }}</p>
-
                                                     <div class="input-group input-{{ $comment->id }}" style="display: none">
                                                         <input type="text" class="form-control content-reply" id="comment-{{ $comment->id }}" name="content-reply">
                                                         <span class="input-group-btn">
@@ -112,7 +109,6 @@
                                         @endif
                                     @endforeach
                                 </div>
-
                                 <br><br>
                                 <h2 class="text-left">Use Facebook Comment</h2>
                                 <div class="comment">
@@ -121,7 +117,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <!-- END LEFT SIDEBAR -->
 
@@ -136,27 +131,8 @@
             <!-- END SIDEBAR & CONTENT -->
         </div>
     </div>
-    <script>
-        CKEDITOR.replace('editor-post', {
-            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
-            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
-            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-        });
-    </script>
-    <script>window.parent.CKEDITOR.tools.callFunction(1,'{$url}','')</script>
 @stop
 
-<style>
-    #facebook .hidden_elem {
-        display: block !important;
-    }
-</style>
-@section('script')
-    <script src="{{ asset('source/frontend/theme/assets/frontend/js/jquery-1.9.1.js') }}" type="text/javascript"></script>
-@stop
 
 
 

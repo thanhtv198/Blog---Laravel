@@ -23,7 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->text('slug')->nullable();
             $table->longText('content');
             $table->integer('view')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(config('blog.question.status.active'));
             $table->softDeletesTz();
             $table->timestamps();
         });

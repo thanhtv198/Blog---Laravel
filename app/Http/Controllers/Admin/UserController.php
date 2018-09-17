@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Http\Requests\LoginRequet;
-use App\Http\Requests\UserRequets;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,10 +34,10 @@ class UserController extends Controller
     /**
      * Stoure
      *
-     * @param UserRequets $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserRequets $request)
+    public function store(UserRequest $request)
     {
         $this->uploadImage($request->file('image'));
 

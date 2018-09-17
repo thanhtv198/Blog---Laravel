@@ -13,7 +13,7 @@
 //auth route
 Auth::routes();
 
-//route Auth
+//route logout and login social
 Route::namespace('Auth')->group(function () {
     Route::get('/logout', 'LoginController@logout');
 
@@ -57,13 +57,14 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     // route resource post
     Route::resource('posts', 'PostController');
+
     //comment posts
     Route::post('posts/{id}/comments', 'PostController@comment')->name('posts.comment');
     Route::post('posts/{id}/replies', 'PostController@reply')->name('posts.reply');
 
     //route resource topic
     Route::resource('topics', 'TopicController');
-    Route::get('topics/{id}/posts', [
+    Route::get('topics/{slug}/posts', [
         'as' => 'posts',
         'uses' => 'TopicController@getPostByTopicId',
     ]);
@@ -71,6 +72,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     //route resource tag
     Route::resource('tags', 'TagController');
 
+    //route resource tag
     Route::resource('users', 'UserController');
     Route::get('users/{id}/timeline', 'UserController@getTimeline')->name('users.timeline');
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\Repositories\UserRepository;
-use App\Http\Requests\UserRequets;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use phpDocumentor\Reflection\DocBlock\Description;
@@ -79,7 +79,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequets $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $file = $request->file('image');
 

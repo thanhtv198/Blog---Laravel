@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Topic extends Model
 {
-    use Sluggable;
+    use Sluggable, SluggableScopeHelpers, SoftDeletes;
 
     protected $fillable = [
         'id',
@@ -16,6 +18,8 @@ class Topic extends Model
         'parent_id',
         'status',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function user()
     {

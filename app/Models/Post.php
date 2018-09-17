@@ -6,10 +6,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Post extends Model
 {
-    use Searchable, Sluggable, SoftDeletes;
+    use Searchable, Sluggable, SluggableScopeHelpers, SoftDeletes;
 
     const VIEW = 0;
 

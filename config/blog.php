@@ -22,6 +22,7 @@ return [
             'active' => 1,
         ],
         'paginate' => 5,
+        'view' => 0,
     ],
 
     //post
@@ -34,11 +35,13 @@ return [
         'paginate' => 5,
         'recent' => 5,
         'limit' => 10,
+        'view' => 0,
     ],
 
     //
     'tag' => [
         'limit' => 20,
+        'view' => 0,
     ],
 
 ];

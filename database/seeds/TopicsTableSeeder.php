@@ -20,7 +20,7 @@ class TopicsTableSeeder extends Seeder
                 'name' => $faker->unique()->sentence($nbWords = 3),
                 'slug' => $faker->unique()->slug(4),
                 'parent_id' => null,
-                'quantity' => 0
+                'quantity' => config('blog.topic.quantity')
             ]);
         }
     }

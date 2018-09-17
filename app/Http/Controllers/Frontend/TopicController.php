@@ -17,88 +17,19 @@ class TopicController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Get posts of topic by topic id
      *
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
-    {
-        $topics = $this->repository->paginate();
-
-        return view('frontend.post.index', compact('topics'));
-    }
-
     public function getPostByTopicId($id)
     {
         $posts = $this->repository->getPostById($id);
 
         $topicSidebar = $id;
+
+        $topicName = $this->repository->getNameById($id);
        
-        return view('frontend.topic.index', compact('posts', 'topicSidebar'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Topic $topic)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Topic $topic)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Topic $topic)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Topic $topic)
-    {
-        //
+        return view('frontend.topic.index', compact('posts', 'topicName', 'topicSidebar'));
     }
 }

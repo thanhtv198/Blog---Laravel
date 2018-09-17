@@ -17,7 +17,7 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('slug')->nullable();
-            $table->string('view')->default(0);
+            $table->string('view')->default(config('blog.tag.view'));
             $table->timestamps();
         });
     }

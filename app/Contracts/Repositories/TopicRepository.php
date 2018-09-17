@@ -6,5 +6,7 @@ interface TopicRepository extends AbstractRepository
 {
     public function getPostById($id);
 
-    public function paginate();
+    public function active($id);
+
+    public function getNameById($id);
 }

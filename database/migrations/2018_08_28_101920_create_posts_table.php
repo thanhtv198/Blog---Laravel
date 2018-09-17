@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique()->nullable();
             $table->longText('content');
             $table->integer('view')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(config('blog.post.status.active'));
             $table->string('reject_reason')->nullable();
             $table->softDeletesTz();
             $table->timestamps();

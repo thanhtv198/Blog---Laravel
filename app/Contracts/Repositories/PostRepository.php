@@ -10,5 +10,11 @@ interface PostRepository extends AbstractRepository
 
     public function getTags($id);
 
+    public function active($id);
+
     public function inActive($id, $data);
+
+    public function comment($id, $data);
+
+    public function reply($parentId, $data);
 }

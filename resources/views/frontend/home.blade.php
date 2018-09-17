@@ -23,7 +23,7 @@
                                          src="{{ asset('source/frontend/theme/assets/frontend/pages/img/works/img2.jpg') }}">
                                 </div>
                                 <div class="col-md-8 col-sm-8">
-                                    <h2><a href="{{ route('posts.show', $row->id) }}">{{ $row->title }}</a></h2>
+                                    <h2><a href="{{ route('posts.show', $row->slug) }}">{{ $row->title }}</a></h2>
                                     <ul class="blog-info">
                                         <li><i class="fa fa-calendar"></i>{{ $row->created_at }}</li>
                                         <li><i class="fa fa-eye"></i>{{ $row->view }}</li>

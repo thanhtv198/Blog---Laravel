@@ -6,11 +6,11 @@
         @foreach($topics as $row)
             <li>
                 @if(isset($topicSidebar) && $topicSidebar == $row->id)
-                    <a href="{{ route('posts',  ['id' => $row->id]) }}" class="title-topic-choose">
+                    <a href="{{ route('posts',  ['slug' => $row->slug]) }}" class="title-topic-choose">
                         {{ $row->name }} ({{ count($row->posts) }})
                     </a>
                 @else
-                    <a href="{{ route('posts',  ['id' => $row->id]) }}">{{ $row->name }} ({{ count($row->posts) }})</a>
+                    <a href="{{ route('posts',  ['slug' => $row->slug]) }}">{{ $row->name }} ({{ count($row->posts) }})</a>
                 @endif
             </li>
         @endforeach

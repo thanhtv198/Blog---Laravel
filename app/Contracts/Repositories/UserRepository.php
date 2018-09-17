@@ -6,6 +6,8 @@ interface UserRepository extends AbstractRepository
 {
     public function login($data);
 
+    public function active($id);
+
     public function inActive($id, $data);
 
     public function getPosts($id);

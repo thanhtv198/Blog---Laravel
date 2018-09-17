@@ -19,7 +19,7 @@
                     dataType: "json",
                     success: function (data) {
                         let id = data.id;
-                        console.log(content);
+                        console.log(data);
                         let url = 'http://localhost:8000/posts/' + id + '/replies';
                         let comment = '                 <div class="media comment-parent">\n' +
                             '                                                   <a href="javascript:;" class="pull-left">\n' +
@@ -136,4 +136,4 @@ $(document).ready(
                 return false;
             });
         });
-
+//select2

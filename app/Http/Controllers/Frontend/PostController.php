@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\Repositories\PostRepository;
-use App\Http\Requests\CommentRequets;
+use App\Contracts\Repositories\TagRepository;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Comment;
 use App\Models\Post;
@@ -15,9 +16,12 @@ class PostController extends Controller
 {
     protected $repository;
 
-    public function __construct(PostRepository $repository)
+    protected $tagRepository;
+
+    public function __construct(PostRepository $repository, TagRepository $tagRepository)
     {
         $this->repository = $repository;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -39,11 +43,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('frontend.post.create');
+        $tags = $this->tagRepository->pluck();
+
+        return view('frontend.post.create', compact('tags'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new post
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -52,7 +58,9 @@ class PostController extends Controller
     {
         $data = $request->only('content', 'title');
 
-        $this->repository->store($data);
+        $post = $this->repository->store($data);
+
+        $this->tagRepository->saveTagsByPost($request->tags, $post->id);
 
         return redirect()->route('home');
     }
@@ -97,7 +105,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->only('title', 'content');
-//dd($data);
+
         $this->repository->update($id, $data);
 
         return redirect()->route('home');
@@ -112,38 +120,34 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        dd(4);
+        //
     }
 
     /**
      * @param CommentRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function comment(Request $request, $id)
+    public function comment(CommentRequest $request, $id)
     {
-        $request->merge([
-            'user_id' => Auth::user()->id,
-            'status' => 1,
-            'commentable_id' => $id,
-            'commentable_type' => 'post',
-        ]);
-
-        $comment = Comment::create($request->all());
+        $comment = $this->repository->comment($id, $request->all());
 
         return response()->json($comment);
     }
 
-
+    /**
+     * Reply comment
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function reply(Request $request, $id)
     {
-       $comment =  Comment::create([
-            'user_id' => Auth::user()->id,
-            'status' => 1,
-            'content' => $request->repContent,
-            'commentable_id' => $id,
-            'commentable_type' => 'post',
-            'parent_id' => $request->parent_id,
-        ]);
+       $request->merge([
+          'content' => $request->repContent,
+       ]);
+
+       $comment = $this->repository->reply($id, $request->all());
 
         return response()->json([
             'comment' => $comment,
@@ -152,3 +156,4 @@ class PostController extends Controller
 
     }
 }
+

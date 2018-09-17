@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequet;
-use App\Models\User;
 use App\Repositories\UserRepositoryEloquent;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -25,6 +24,8 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
+     * Show login form user
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showLoginForm()
@@ -32,11 +33,23 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    /**
+     * show login form admin
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showLoginFormAdmin()
     {
         return view('auth.login_admin');
     }
 
+    /**
+     * Login user
+     *
+     * @param LoginRequet $request
+     * @param UserRepositoryEloquent $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(LoginRequet $request, UserRepositoryEloquent $user)
     {
         $data = $request->all();
@@ -48,6 +61,11 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Logout user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();

@@ -24,19 +24,16 @@ class TopicRepositoryEloquent extends AbstractRepositoryEloquent implements Topi
 
     public function show($id)
     {
-        return $this->model()->findOrFail($id);
+        return $this->model()->findBySlugOrFail($id);
     }
 
     public function store(array $data)
     {
         return $this->model()->create([
-            'title' => $data['title'],
+            'name' => $data['name'],
             'slug' => $data['slug'],
-            'description' => $data['description'],
-            'content' => $data['content'],
-            'status' => $data['active'],
-            'image' => $data['image'],
-            'view' => $data['view'],
+            'parent_id' => $data['slug'],
+            'status' => config('blog.topic.status.active'),
         ]);
     }
 
@@ -47,50 +44,78 @@ class TopicRepositoryEloquent extends AbstractRepositoryEloquent implements Topi
 
     public function update($id, array $data)
     {
-        $topic = $this->model()->findOrFail($id)->update([
+        $topic = $this->model()->findBySlugOrFail($id)->update([
             'name' => $data['name'],
             'slug' => $data['slug'],
+            'parent_id' => $data['slug'],
+            'status' => config('blog.topic.status.active'),
         ]);
 
         return $topic;
     }
 
+    /**
+     * Destroy topic by id
+     *
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
-        $topic = $this->model()->fincOrFail($id);
+        $topic = $this->model()->findBySlugOrFail($id);
 
         return $topic->delete();
     }
 
+    /**
+     * Active topic by id
+     *
+     * @param $id
+     * @return Topic
+     */
     public function active($id)
     {
-        $topic = $this->model()->findOrFail($id)->update([
+        $topic = $this->model()->findBySlugOrFail($id)->update([
             'status' => config('blog.topic.active'),
         ]);
 
         return $topic;
     }
 
+    /**
+     * in active topic by id
+     *
+     * @param int $id
+     * @return Topic
+     */
     public function inactive($id)
     {
-        $topic = $this->model()->findOrFail($id)->update([
+        $topic = $this->model()->findBySlugOrFail($id)->update([
             'status' => config('blog.topic.inactive'),
         ]);
 
         return $topic;
     }
 
+    /**
+     * Get all Post belong to topic
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function getPostById($id)
     {
-        return $this->model()->findOrFail($id)->posts;
+        return $this->model()->findBySlugOrFail($id)->posts;
     }
 
-    public function paginate()
+    /**
+     * Get name of topic
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function getNameById($id)
     {
-        $topics = $this->model()
-        ->latest()
-        ->paginate(config('blog.topic.paginate'));
-
-        return $topics;
+        return $this->model()->findBySlugOrFail($id)->name;
     }
 }

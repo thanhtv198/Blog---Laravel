@@ -59,10 +59,7 @@ License: You must have a valid license purchased only from themeforest (the abov
     <link href="{{ asset('source/frontend/theme/assets/frontend/layout/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('source/frontend/theme/assets/frontend/css/custom.css') }}" rel="stylesheet">
     <script src="{{ asset('source/frontend/theme/assets/global/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />--}}
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>--}}
-    <link rel="stylesheet" href="{{ asset('source/admin/plugins/select2/select2.css') }}">
-    <script src="{{ asset('source/admin/plugins/select2/select2.full.js') }}" type="text/javascript"></script>
+
 
     <!-- Theme styles END -->
 </head>
@@ -86,7 +83,7 @@ License: You must have a valid license purchased only from themeforest (the abov
     @include('frontend/layouts/footer')
 <!-- ./wrapper -->
 <!-- jQuery -->
-    @yield('script')
+    {{--@yield('script')--}}
     <!-- Load javascripts at bottom, this will reduce page load time -->
     <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
     <!--[if lt IE 9]>
@@ -123,4 +120,6 @@ License: You must have a valid license purchased only from themeforest (the abov
         });
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 </body>

@@ -1,18 +1,7 @@
-
-{{--<link rel="stylesheet" href="{{ asset('source/admin/plugins/select2/select2.css') }}">--}}
-{{--<script src="{{ asset('source/admin/plugins/select2/select2.full.js') }}" type="text/javascript"></script>--}}
-{{--<select class="js-example-basic-single" name="state">--}}
-    {{--<option value="AL">Alabama</option>--}}
-    {{--<option value="WY">Wyoming</option>--}}
-{{--</select>--}}
-{{--<script>--}}
-    {{--$(document).ready(function() {--}}
-        {{--$('.js-example-basic-single').select2();--}}
-    {{--});--}}
-{{--</script>--}}
-
 @extends('frontend/layouts/index')
+
 @section('content')
+
     <div class="main">
         <div class="container">
             <ul class="breadcrumb">
@@ -21,13 +10,16 @@
                 <li class="active">Blog Item</li>
             </ul>
             <br>
-            {!! Form::open(['route' => ['posts.create'] , 'method' => 'post', 'files' => true]) !!}
+            {!! Form::open(['route' => ['posts.store'] , 'method' => 'POST', 'files' => true]) !!}
             <div>
                 <h2>Write your new post </h2>
                 Content
                 {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => trans('en.form.title')]) !!}
-                Image
-                {!! Form::file('image') !!}
+                <br>
+                <div class="form-group">
+                    <label>{{ trans('common.form.role') }}</label>
+                    {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'id' => 'tag', 'multiple' => true]) !!}
+                </div>
             </div>
             <br>
             <div id="ckeditor-content">
@@ -35,8 +27,20 @@
             </div>
             {!! Form::submit(trans('en.button.save'), ['class' =>'btn btn-primary']) !!}
             {!! Form::close() !!}
+
             <hr>
         </div>
     </div>
+
 @stop
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".select2").select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
+    });//document ready
+</script>
 

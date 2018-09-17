@@ -13,13 +13,18 @@ class TagRepositoryEloquent extends AbstractRepositoryEloquent implements TagRep
         return app(Tag::class);
     }
 
+    /**
+     * Get all tags lates
+     *
+     * @return array $tags
+     */
     public function all()
     {
-        $tag = $this->model()
+        $tags = $this->model()
             ->latest()
             ->get();
 
-        return $tag;
+        return $tags;
     }
 
     public function show($id)
@@ -29,17 +34,26 @@ class TagRepositoryEloquent extends AbstractRepositoryEloquent implements TagRep
 
     public function store(array $data)
     {
-        $tag = $this->model()->create([
-            'title' => $data['title'],
-            'slug' => $data['slug'],
-            'description' => $data['description'],
-            'content' => $data['content'],
-            'status' => $data['active'],
-            'image' => $data['image'],
-            'view' => $data['view'],
-        ]);
+        // TODO: Implement store() method.
+    }
 
-        return $tag;
+    /**
+     * Save tags whene store post and pivot table
+     *
+     * @param array $data
+     * @param int $id
+     */
+    public function saveTagsByPost(array $data, $id)
+    {
+        foreach ($data as $value) {
+            $tag = $this->model()->updateOrCreate([
+                'name' => $value,
+            ], [
+                'view' => config('blog.tag.view'),
+            ]);
+
+            $tag->posts()->sync($id);
+        }
     }
 
     public function edit($id)
@@ -64,24 +78,6 @@ class TagRepositoryEloquent extends AbstractRepositoryEloquent implements TagRep
         return $tag->delete();
     }
 
-    public function active($id)
-    {
-        $tag = $this->findOrFail($id)->update([
-            'status' => config('blog.tag.active'),
-        ]);
-
-        return $tag;
-    }
-
-    public function inActive($id)
-    {
-        $tag = $this->findOrFail($id)->update([
-            'status' => config('blog.tag.inactive'),
-        ]);
-
-        return $tag;
-    }
-
     public function getTagHome()
     {
         $tags = $this->model()
@@ -98,5 +94,10 @@ class TagRepositoryEloquent extends AbstractRepositoryEloquent implements TagRep
         $posts = $tag->posts;
 
         return $posts;
+    }
+
+    public function pluck()
+    {
+        return $this->model()->pluck('name', 'name');
     }
 }

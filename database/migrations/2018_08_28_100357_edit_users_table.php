@@ -14,8 +14,8 @@ class EditUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('status')->after('name')->default(0);
-            $table->tinyInteger('role')->after('name')->default(0);
+            $table->integer('status')->after('name')->default(config('blog.user.status.active'));
+            $table->tinyInteger('role')->after('name')->default(config('blog.user.role.admin'));
             $table->string('avatar')->after('name')->nullable();
             $table->date('birthday')->after('name')->nullable();
             $table->string('provider_id')->nullable()->after('name');

@@ -20,6 +20,4 @@ interface AbstractRepository
     public function update($id, array $data);
 
     public function destroy($id);
-
-    public function active($id);
 }

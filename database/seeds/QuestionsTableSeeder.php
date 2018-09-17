@@ -22,8 +22,8 @@ class QuestionsTableSeeder extends Seeder
                 'title' => $faker->unique()->sentence($nbWords = 15),
                 'slug' => $faker->unique()->slug(10),
                 'content' => $faker->unique()->sentence($nbWords = 30),
-                'status' => 1,
-                'view' => 0,
+                'status' => config('blog.question.status.active'),
+                'view' => config('blog.question.view'),
             ]);
         }
     }
