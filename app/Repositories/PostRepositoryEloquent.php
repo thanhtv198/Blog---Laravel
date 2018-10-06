@@ -137,6 +137,7 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
     public function inActive($id, $data)
     {
         $post = $this->model()->findOrFail($id);
+        Post::query()->create();
 
         $post->update([
             'status' => config('blog.post.status.inactive'),
@@ -146,9 +147,11 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
 
     public function pending($id)
     {
-        $post = $this->model()->findOrFail($id)->update([
-            'status' => config('blog.post.pending'),
-        ]);
+        $post = $this->model()
+            ->findOrFail($id)
+            ->update([
+                'status' => config('blog.post.pending'),
+            ]);
 
         return $post;
     }
@@ -191,7 +194,7 @@ class PostRepositoryEloquent extends AbstractRepositoryEloquent implements PostR
             'parent_id' => null,
             'commentable_id' => $id,
             'commentable_type' => 'post',
-            ]);
+        ]);
 
         return $comment;
     }

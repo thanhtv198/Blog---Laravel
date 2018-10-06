@@ -61,4 +61,11 @@ class NewPostNotification extends Notification
             'name' => $this->post->title,
         ];
     }
+
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'name' => $this->post->title,
+        ];
+    }
 }

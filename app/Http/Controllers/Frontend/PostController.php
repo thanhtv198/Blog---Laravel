@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Contracts\Repositories\PostRepository;
 use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Repositories\UserRepository;
+use App\Events\NotifyWelcome;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Comment;
@@ -74,6 +75,8 @@ class PostController extends Controller
         $admins = $this->userRepository->getAdmin();
 
         Notification::send($admins, new NewPostNotification($post));
+
+        event(new NotifyWelcome("Hi,for reading my article!"));
 
         return redirect()->route('home');
     }

@@ -12,7 +12,7 @@
                 <!-- BEGIN CONTENT -->
                 <div class="col-md-12 col-sm-12">
                     <div class="col-md-9">
-                        @if($post->user->id == auth()->user()->id)
+                        @if(Auth::check() && $post->user->id == auth()->user()->id)
                             <div class="pull-right">
                                 <li class="edit-in-detail">
                                     <a href="{{ route('posts.edit', $post->id) }}">
@@ -64,7 +64,9 @@
                                 </div>
                                 <h2>{{ trans('en.tag.comments') }}</h2>
                                 <div class="comments">
-                                    {!! Form::hidden('username', auth()->user()->name) !!}
+                                    @if(Auth::check())
+                                        {!! Form::hidden('username', auth()->user()->name) !!}
+                                    @endif
                                     @foreach ($comments as $comment)
                                         @if($comment->parent_id == null)
                                             <div class="media comment-parent">

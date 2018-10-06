@@ -75,7 +75,7 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-warning navbar-badge">15</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="messages">
                 <span class="dropdown-item dropdown-header">15 Notifications</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
@@ -86,8 +86,6 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-        <ul id="messages">
-        </ul>
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                 <i class="fa fa-th-large"></i>
@@ -96,7 +94,28 @@
     </ul>
 </nav>
 <!-- /.navbar -->
-@section('script')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-@stop
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // alert('ok');
+        // Khởi tạo một đối tượng Pusher với app_key
+        var pusher = new Pusher('9281613fb77542ad60a7', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        //Đăng ký với kênh chanel-demo-real-time mà ta đã tạo trong file DemoPusherEvent.php
+        var channel = pusher.subscribe('notify-welcome');
+        //Bind một function addMesagePusher với sự kiện DemoPusherEvent
+        channel.bind('App\\Events\\NotifyWelcome', addMessageDemo);
+        // alert('ok');
+    });
+
+    //function add message
+    function addMessageDemo(data) {
+        var liTag = $("<li class='list-group-item'></li>");
+        liTag.html(data);
+        $('#messages').append(liTag);
+    }
+</script>
