@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Tag;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
+
         view()->composer('frontend.layouts.sidebar', function ($view) {
             $recentPost = Post::getRecent()
                 ->paginate(config('blog.post.recent'));
