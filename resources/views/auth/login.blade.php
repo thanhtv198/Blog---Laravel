@@ -57,7 +57,7 @@
                 <div class="col-xs-6 col-sm-2">
                     <a href="{{ url('login/line') }}" class="btn btn-lg btn-block omb_btn-google loginBtn loginBtn--google">
                         <i class="fa fa-google-plus visible-xs"></i>
-                        <span class="hidden-xs">{{ trans('en.auth.line+') }}</span>
+                        <span class="hidden-xs">{{ trans('en.auth.line') }}</span>
                     </a>
                 </div>
             </div>

@@ -22,6 +22,7 @@ class SocialService implements SocialInterface
             [
                 'provider_id' => $authUser->id,
                 'name' => $authUser->name,
+//                'avatar' => $authUser->avatar,
                 'status' => 0,
                 'role' => 1,
             ]
